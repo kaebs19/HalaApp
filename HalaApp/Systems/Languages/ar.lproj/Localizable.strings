@@ -1,0 +1,20 @@
+/* 
+  Localizable.strings
+  HalaApp
+
+  Created by Mohammed Saleh on 07/06/2025.
+  
+*/
+
+
+// Lable
+
+
+
+
+// Button
+"SkipButton" = "تخطي";
+"ContinueButton" = "استمرار";
+"SignInButton" = "تسجيل دخول";
+"SignUpButton" = "انشاء حساب";
+"SignOutButton" = "تسجيل خروج";

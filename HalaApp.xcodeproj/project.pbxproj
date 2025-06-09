@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		5C11631E2DF3A108006B6B26 /* MOLH in Frameworks */ = {isa = PBXBuildFile; productRef = 5C11631D2DF3A108006B6B26 /* MOLH */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		5C1162932DF26233006B6B26 /* HalaApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HalaApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -14,7 +18,7 @@
 		5C1162A52DF26235006B6B26 /* Exceptions for "HalaApp" folder in "HalaApp" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Info.plist,
+				Resources/Info.plist,
 			);
 			target = 5C1162922DF26233006B6B26 /* HalaApp */;
 		};
@@ -36,6 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5C11631E2DF3A108006B6B26 /* MOLH in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +83,7 @@
 			);
 			name = HalaApp;
 			packageProductDependencies = (
+				5C11631D2DF3A108006B6B26 /* MOLH */,
 			);
 			productName = HalaApp;
 			productReference = 5C1162932DF26233006B6B26 /* HalaApp.app */;
@@ -104,9 +110,13 @@
 			knownRegions = (
 				en,
 				Base,
+				ar,
 			);
 			mainGroup = 5C11628A2DF26233006B6B26;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				5C11631C2DF3A108006B6B26 /* XCRemoteSwiftPackageReference "MOLH" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 5C1162942DF26233006B6B26 /* Products */;
 			projectDirPath = "";
@@ -147,12 +157,14 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = ZN3Z5KRWM7;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = HalaApp/Info.plist;
+				INFOPLIST_FILE = HalaApp/Resources/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "هلا شات";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -175,12 +187,14 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = ZN3Z5KRWM7;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = HalaApp/Info.plist;
+				INFOPLIST_FILE = HalaApp/Resources/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "هلا شات";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -199,6 +213,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -263,6 +278,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -337,6 +353,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		5C11631C2DF3A108006B6B26 /* XCRemoteSwiftPackageReference "MOLH" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/MoathOthman/MOLH";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.2.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		5C11631D2DF3A108006B6B26 /* MOLH */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5C11631C2DF3A108006B6B26 /* XCRemoteSwiftPackageReference "MOLH" */;
+			productName = MOLH;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 5C11628B2DF26233006B6B26 /* Project object */;
 }

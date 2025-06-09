@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23727" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--OnboardingVC-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController storyboardIdentifier="OnboardingVC" id="Y6W-OH-hqX" customClass="OnboardingVC" customModule="HalaApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rh4-XR-mkq">
+                                <rect key="frame" x="340" y="123.00000000000001" width="33" height="50.666666666666671"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="SKIP"/>
+                            </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Ovals_0_light" translatesAutoresizingMaskIntoConstraints="NO" id="q3u-x7-LCP">
+                                <rect key="frame" x="18" y="206.66666666666663" width="357" height="357"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="q3u-x7-LCP" secondAttribute="height" multiplier="340:340" id="oyc-AS-Ps2"/>
+                                </constraints>
+                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="xjX-ld-YJq">
+                                <rect key="frame" x="18" y="593.66666666666663" width="357" height="101.33333333333337"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Messages" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6SH-tY-gvl">
+                                        <rect key="frame" x="0.0" y="0.0" width="357" height="20.333333333333332"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="It is a long established fact that a reader will be distracted by the readable content of a page when looking at its." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nDf-px-KKN">
+                                        <rect key="frame" x="0.0" y="40.333333333333371" width="357" height="61"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Next_light" translatesAutoresizingMaskIntoConstraints="NO" id="VEi-zy-yLb">
+                                <rect key="frame" x="163" y="715" width="67" height="67"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="VEi-zy-yLb" secondAttribute="height" multiplier="1:1" id="Mzv-o5-ttJ"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zRv-gA-pOG">
+                                <rect key="frame" x="163" y="715" width="67" height="67"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <connections>
+                                    <action selector="nextButtonTapped:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="AGe-xX-Wzt"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="xjX-ld-YJq" firstAttribute="top" secondItem="q3u-x7-LCP" secondAttribute="bottom" constant="30" id="0KH-O5-qZR"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="xjX-ld-YJq" secondAttribute="trailing" constant="18" id="Eaa-MO-Gqf"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="rh4-XR-mkq" secondAttribute="trailing" constant="20" id="G24-oo-6CV"/>
+                            <constraint firstItem="zRv-gA-pOG" firstAttribute="bottom" secondItem="VEi-zy-yLb" secondAttribute="bottom" id="GfI-T7-xB4"/>
+                            <constraint firstAttribute="bottom" secondItem="VEi-zy-yLb" secondAttribute="bottom" constant="70" id="L8g-Jv-7GV"/>
+                            <constraint firstItem="rh4-XR-mkq" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="5" id="P9C-sQ-V3w"/>
+                            <constraint firstItem="zRv-gA-pOG" firstAttribute="top" secondItem="VEi-zy-yLb" secondAttribute="top" id="REO-Ol-5Kc"/>
+                            <constraint firstItem="VEi-zy-yLb" firstAttribute="width" secondItem="vDu-zF-Fre" secondAttribute="width" multiplier="0.170667" id="Rm9-pt-efk"/>
+                            <constraint firstItem="zRv-gA-pOG" firstAttribute="trailing" secondItem="VEi-zy-yLb" secondAttribute="trailing" id="WuM-js-df9"/>
+                            <constraint firstItem="xjX-ld-YJq" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="18" id="bCG-Fh-KIZ"/>
+                            <constraint firstItem="q3u-x7-LCP" firstAttribute="top" secondItem="rh4-XR-mkq" secondAttribute="bottom" constant="33" id="eeL-rV-ahI"/>
+                            <constraint firstItem="zRv-gA-pOG" firstAttribute="leading" secondItem="VEi-zy-yLb" secondAttribute="leading" id="efh-r6-xZ8"/>
+                            <constraint firstItem="VEi-zy-yLb" firstAttribute="top" secondItem="xjX-ld-YJq" secondAttribute="bottom" constant="20" id="jMY-4l-iT5"/>
+                            <constraint firstItem="VEi-zy-yLb" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="xwQ-TQ-mIu"/>
+                            <constraint firstItem="q3u-x7-LCP" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="18" id="yzu-ru-mE2"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="q3u-x7-LCP" secondAttribute="trailing" constant="18" id="zeZ-D8-pxP"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="animitionIMageView" destination="q3u-x7-LCP" id="eXe-Dd-7aD"/>
+                        <outlet property="datilsLabel" destination="nDf-px-KKN" id="t99-t7-8Sr"/>
+                        <outlet property="imageNextView" destination="VEi-zy-yLb" id="P6j-ec-dvp"/>
+                        <outlet property="nextButton" destination="zRv-gA-pOG" id="Zp6-Od-eY0"/>
+                        <outlet property="skipButton" destination="rh4-XR-mkq" id="vv2-WT-fGT"/>
+                        <outlet property="titleLabel" destination="6SH-tY-gvl" id="hMi-h3-wGf"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="23.664122137404579" y="3.5211267605633805"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Next_light" width="64" height="64"/>
+        <image name="Ovals_0_light" width="376" height="376"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
