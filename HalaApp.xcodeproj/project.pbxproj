@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5C11631E2DF3A108006B6B26 /* MOLH in Frameworks */ = {isa = PBXBuildFile; productRef = 5C11631D2DF3A108006B6B26 /* MOLH */; };
+		5C14BA0F2DF7930500E64E89 /* SwiftMessages in Frameworks */ = {isa = PBXBuildFile; productRef = 5C14BA0E2DF7930500E64E89 /* SwiftMessages */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5C14BA0F2DF7930500E64E89 /* SwiftMessages in Frameworks */,
 				5C11631E2DF3A108006B6B26 /* MOLH in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -84,6 +86,7 @@
 			name = HalaApp;
 			packageProductDependencies = (
 				5C11631D2DF3A108006B6B26 /* MOLH */,
+				5C14BA0E2DF7930500E64E89 /* SwiftMessages */,
 			);
 			productName = HalaApp;
 			productReference = 5C1162932DF26233006B6B26 /* HalaApp.app */;
@@ -116,6 +119,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				5C11631C2DF3A108006B6B26 /* XCRemoteSwiftPackageReference "MOLH" */,
+				5C14BA0D2DF7930500E64E89 /* XCRemoteSwiftPackageReference "SwiftMessages" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 5C1162942DF26233006B6B26 /* Products */;
@@ -363,6 +367,14 @@
 				minimumVersion = 1.2.0;
 			};
 		};
+		5C14BA0D2DF7930500E64E89 /* XCRemoteSwiftPackageReference "SwiftMessages" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftKickMobile/SwiftMessages";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.0.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -370,6 +382,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 5C11631C2DF3A108006B6B26 /* XCRemoteSwiftPackageReference "MOLH" */;
 			productName = MOLH;
+		};
+		5C14BA0E2DF7930500E64E89 /* SwiftMessages */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5C14BA0D2DF7930500E64E89 /* XCRemoteSwiftPackageReference "SwiftMessages" */;
+			productName = SwiftMessages;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

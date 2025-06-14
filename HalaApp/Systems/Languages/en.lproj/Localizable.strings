@@ -7,13 +7,104 @@
 */
 
 // Lable
+"FindNewLab"="Find new friends nearby";
+"FindNewSubtitleLab"="With milions of users all over the world, we gives you the ability to connect with people no matter where you are.";
+
+"loginLabel"="Log In";
+"registerLabel"="Sign Up";
+"welcomeLabel"="Welcome back";
+"welcomeSubtitleLabel"="Login to your account";
+"createAccountLabel"="Create an account";
+"argeementLabel"="By clicking Sign up you agree to the following Terms and Conditions without reservation ";
+"iAgreeLabel"="I agree for";
+"forgotPasswordSubtitleLabel" = "Please enter your email address. You will receive a link to create a new password via email.";
+"LogoutLable" = "Sign Out";
+"qrCodeSubtitleLabel" = "Hala Chat App users can scan this QR Code to add you as a friend.";
+"lightModeLabel" = "Light";
+"darkModeLabel" = "Dark";
+"Languae" = "العربية";
+"selectLanguageLabel" = "SelectLanguage";
+"rememberMeLabel" = "Remember me";
+"iHaveReadAndAgreeLabel" = "I have read and agreed to the";
+"dontHaveAccountLabel" = "Don't Have an Account?";
+"continuationButton" = "Continuation";
+"orContinueWithLabel" = "------- or continue with ------";
+
+// --   Buttons
+"HelpTitle"="Help";
+"skipButton"="Skip";
+"loginButton"="Log In";
+"registerButton"="Sign Up";
+"forgotPasswordButton" = "Forgot your password?";
+"TermsButton"= "Terms";
+"ConditionsButton"="Conditions";
+"sendButton" = "Send";
+"doneButton" = "Done";
+"cancelButton" = "Cancel";
 
 
 
+// textField
 
-// Button
-"SkipButton" = "Skip";
-"ContinueButton" = "Continue";
-"SignInButton" = "SignIn";
-"SignUpButton" = "SignUp";
-"SignOutButton" = "SignOut";
+"EmailTFPlaceholder" = "Email";
+"PasswordTFPlaceholder" = "Password";
+"NameTFPlaceholder" = "Name";
+
+
+// Alert
+
+"LoadingTitle" = "Loading...";
+"SuccessTitle" = "Success";
+"ErrorTitle" = "Error";
+"WarningTitle" = "Warning";
+"InfoTitle" = "Information";
+"NetworkErrorTitle" = "Network Error";
+"ValidationTitle" = "Data Validation";
+"RequiredTitle" = "Required Field";
+"SavingTitle" = "Saving...";
+"UploadingTitle" = "Uploading...";
+"ConnectingTitle" = "Connecting...";
+"UpdateAvailableTitle" = "Update Available";
+"ConfirmDeleteTitle" = "Confirm Delete";
+
+"SuccessBody" = "Operation completed successfully";
+"FailureBody" = "Operation failed";
+"UnknownBody" = "An unexpected error occurred";
+"NetworkErrorBody" = "Please check your internet connection";
+"InternetConnectionBody" = "Please check your internet connection and try again";
+"FillAllFieldsBody" = "Please fill in all required fields";
+"DataValidationBody" = "Please check the entered data";
+"UpdateDescriptionBody" = "A new version of the app is available with improvements and new features";
+"DeleteConfirmationBody" = "Are you sure you want to delete this item? This action cannot be undone";
+"PleaseWaitBody" = "Please wait...";
+
+
+// Alerts
+"EmailAlert" = "Email";
+"PasswordAlert" = "Password";
+"InvalidEmailAlert" = "Invalid mail";
+"ErrorAlert"="Error";
+"PleaseFillAllFieldsAlert"="Please fill all fields";
+"PasswordDoesNotMatchAlert"="Password does not match";
+"YouMastAgreeToTermsAndConditionsAlert"="You mast agree to terms and conditions";
+"EmailOrPasswordIsEmptyAlert"="Email or Password is empty";
+"SuccessAlert"="Success";
+"SuccessfullyLoggedInAlert"="SuccessfullyLoggedInAlert";
+"PasswordIsShortAlert"="Password is too short please try again ";
+ "EmailFormatIsIncorrectAlert"="Invalid mail format please try again";
+ "PasswordIsEmptyAlert"="Emil is Empty please try again ";
+"EmailIsEmptyAlert"="Password is Empty please try again";
+"WarningAlert"="Confirm Logout";
+"WarningMessageAlert"="Are you sure you want to log out?";
+"YesAlert"="Yes";
+"NoAlert"="No";
+"CancelAlert"="Cancel";
+"AddedToYourFavoritesListAlert"="The product has been added to your favorites list.";
+"RemovedFromYourFavoritesListAlert"="The product has been removed from your favorites list.";
+"FavoritesUpdateTitleAlert"="Favorites Update";
+"ChooseImageAlert"="Choose Image";
+ "DetailsChooseImageAlert"="";
+"CameraAlert"="Camera";
+"PhotoLabaryAlert"="Photo Labary";
+"RequiredEmailAlert" = "Required Email";
+"RequiredPassword" = "Required Password";

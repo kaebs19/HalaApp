@@ -9,14 +9,20 @@ import Foundation
 
 enum Buttons: String   {
     
-    case skip = "SkipButton"
-    case Continuation = "ContinueButton"
-    case SignIn = "SignInButton"
-    case SignUp = "SignUpButton"
-    case SignOut = "SignOutButton"
+    case test = "testButton"
+    case skip = "skipButton"
+    case login = "loginButton"
+    case signup = "registerButton"
+    case forgotPassword = "forgotPasswordButton"
+    case terms = "TermsButton"
+    case conditions = "ConditionsButton"
+    case send = "sendButton"
+    case done = "doneButton"
+    case cancel = "cancelButton"
+    case Continuation = "continuationButton"
     
-    
+
     var titleButton: String {
-        return self.rawValue.lolocalized
+        return self.rawValue.localized
     }
 }

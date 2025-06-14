@@ -7,7 +7,6 @@
 
     import UIKit
 
-
     extension UIViewController {
         
         enum NavigationStyle {
@@ -127,3 +126,4 @@ extension UIViewController {
     }
    
 }
+

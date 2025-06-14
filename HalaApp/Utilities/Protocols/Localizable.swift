@@ -9,5 +9,5 @@ import Foundation
 
 protocol Localizable {
     
-    var lolocalized: String { get }
+    var localized: String { get }
 }

@@ -19,4 +19,8 @@ extension Notification.Name {
     static let appDidEnterBackground = Notification.Name("appDidEnterBackground")
 
 
+    static let hapticSettingsChanged = Notification.Name("hapticSettingsChanged")
+    static let themeSettingsChanged = Notification.Name("themeSettingsChanged")
+    static let languageSettingsChanged = Notification.Name("languageSettingsChanged")
+
 }

@@ -256,7 +256,7 @@ extension AppNavigationManager {
         
         let logoutButton = UIButton()
         logoutButton.setupCustomButton(
-            title: .SignOut,
+            title: .cancel,
             titleColor: .buttonText,
             backgroundColor: .error,
             ofSize: .size_16,

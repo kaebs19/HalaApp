@@ -8,13 +8,105 @@
 
 
 // Lable
+"FindNewLab"="أصدقاء جدد، قصص جديدة… تبدأ من هنا .";
+"FindNewSubtitleLab"="مع الكثير من المستخدمين في جميع أنحاء العالم، نمنحك القدرة على التواصل مع الأشخاص أينما كنت.";
+"loginLabel"="تسجيل دخول";
+"registerLabel"="انشاء حساب جديد";
+"welcomeLabel"="ياهلا فيك بعوتك مرة اخرى";
+"welcomeSubtitleLabel"="قم بالتسجيل الدخول إلى الحساب الخاص بك من جديد.";
+"createAccountLabel"="قم بتعبية البيانات للتسجيل";
+"argeementLabel"="بالنقر فوق تسجيل فإنك توافق على الشروط والأحكام التالية دون تحفظ .";
+"iAgreeLabel"="انا موافق على";
+"forgotPasswordSubtitleLabel" = "يرجى إدخال بريدك الإلكتروني. سيصلك رابط لإنشاء كلمة مرور جديدة عبر البريد الإلكتروني.";
+
+"qrCodeSubtitleLabel" = "يمكن لمستخدمي تطبيق هلا شات مسح رمز الاستجابة السريعة هذا لإضافتك كصديق.";
+"lightModeLabel" = "فاتح";
+"darkModeLabel" = "مظلم";
+"Languae" = "English";
+"selectLanguageLabel" = "تحديد اللغة";
+"rememberMeLabel" = "تذكرنى";
+"iHaveReadAndAgreeLabel" = "لقد قرأت ووافقت على";
+"dontHaveAccountLabel" = "ليس لديك حساب؟";
+"continuationButton" = "أستمرار";
+"orContinueWithLabel" = "------- او الاستمرار مع ------";
 
 
 
+// --   Buttons
+"HelpTitle"="مساعدة";
+"skipButton"="تخطي";
+"loginButton"="تسجيل دخول";
+"registerButton"="انشاء حساب";
+"forgotPasswordButton" = "هل نسيت كلمةالسر ؟";
+"TermsButton"= "شروط الاستخدام";
+"ConditionsButton"="سياسية الخصوصية";
+"sendButton" = "أرسال";
+"doneButton" = "تم";
+"cancelButton" = "الغاء الأمر";
 
-// Button
-"SkipButton" = "تخطي";
-"ContinueButton" = "استمرار";
-"SignInButton" = "تسجيل دخول";
-"SignUpButton" = "انشاء حساب";
-"SignOutButton" = "تسجيل خروج";
+
+
+// textField
+
+"EmailTFPlaceholder" = "البريد الاكتروني";
+"PasswordTFPlaceholder" = "كلمة المرور";
+"NameTFPlaceholder" = "الاسم";
+
+
+
+// Alert
+
+"LoadingTitle" = "جاري التحميل...";
+"SuccessTitle" = "تم بنجاح";
+"ErrorTitle" = "خطأ";
+"WarningTitle" = "تحذير";
+"InfoTitle" = "معلومة";
+"NetworkErrorTitle" = "خطأ في الشبكة";
+"ValidationTitle" = "تحقق من البيانات";
+"RequiredTitle" = "حقل مطلوب";
+"SavingTitle" = "جاري الحفظ...";
+"UploadingTitle" = "جاري الرفع...";
+"ConnectingTitle" = "جاري الاتصال...";
+"UpdateAvailableTitle" = "تحديث متاح";
+"ConfirmDeleteTitle" = "تأكيد الحذف";
+
+"SuccessBody" = "تمت العملية بنجاح";
+"FailureBody" = "فشلت العملية";
+"UnknownBody" = "حدث خطأ غير متوقع";
+"NetworkErrorBody" = "تحقق من اتصال الإنترنت";
+"InternetConnectionBody" = "تحقق من اتصال الإنترنت وحاول مرة أخرى";
+"FillAllFieldsBody" = "يرجى ملء جميع الحقول المطلوبة";
+"DataValidationBody" = "تحقق من صحة البيانات المدخلة";
+"UpdateDescriptionBody" = "يتوفر إصدار جديد من التطبيق يحتوي على تحسينات وميزات جديدة";
+"DeleteConfirmationBody" = "هل أنت متأكد من رغبتك في حذف هذا العنصر؟ لا يمكن التراجع عن هذا الإجراء";
+"PleaseWaitBody" = "يرجى الانتظار...";
+
+// Alerts
+"EmailAlert" = "البريد الأكتروني";
+"PasswordAlert" = "كلمة المرور";
+
+"InvalidEmailAlert" = "البريد الأكتروني غير صالح";
+"ErrorAlert"="حدث خطا";
+"PleaseFillAllFieldsAlert"="الرجاء التاكد من ملي جميع الحقول";
+"PasswordDoesNotMatchAlert"="كلمة المرور غير متطابقة";
+"YouMastAgreeToTermsAndConditionsAlert"="يجب عليك الموافقة على الشروط والأحكام";
+"EmailOrPasswordIsEmptyAlert"="البريد أو كلمة المرور فارغة";
+"SuccessAlert"="نجح";
+"SuccessfullyLoggedInAlert"="تم تسجيل دخول بنجاح";
+"PasswordIsShortAlert"="كلمة المرور قصيرة جداً يجب ان تكون اكبر من 6 احرف وارقام ";
+ "EmailFormatIsIncorrectAlert"="تنسيق البريد الاكتروني غير صحيح يرجاء محاولة مرة اخري";
+ "PasswordIsEmptyAlert"="البريد الأكتروني فارغ يرجاء إعادة كتابتة ! ";
+"EmailIsEmptyAlert"="كلمة المرور فازغة يرجاء كتابة كلمه المرور !";
+"WarningAlert"="تأكيد تسجيل الخروج";
+"WarningMessageAlert"="هل أنت متأكد أنك تريد تسجيل الخروج؟";
+"YesAlert"="نعم";
+"NoAlert"="لا";
+"CancelAlert"="إلغاء الأمر";
+"AddedToYourFavoritesListAlert"="لقد تمت إضافة المنتج إلى قائمة المفضلة لديك. ";
+"RemovedFromYourFavoritesListAlert"="تمت إزالة المنتج من قائمة المفضلة لديك.";
+"FavoritesUpdateTitleAlert"="تحديث المفضلة";
+"ChooseImageAlert" = "اختر صورة";
+"CameraAlert" = "الكاميرا";
+"PhotoLabaryAlert" = "مكتبة الصور";
+"RequiredEmailAlert" = "البريد مطلوب";
+"RequiredPassword" = "كلمة السر مطلوب";

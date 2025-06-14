@@ -13,6 +13,8 @@ enum Gradients: String {
     
     case orange = "GradientOrange"
     case clear = "Clear"
+    case s_00C8FE = "S_00C8FE"
+    case e_4FACFE = "E_4FACFE"
     
     /// الحصول على لون UIColor من ملف الألوان
     var color: UIColor {
