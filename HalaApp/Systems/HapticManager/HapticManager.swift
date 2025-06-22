@@ -176,12 +176,12 @@ class HapticManager {
     /// تحقق من تفعيل الاهتزاز في الإعدادات
     private var isHapticEnabled: Bool {
         // يمكنك ربطها بإعدادات التطبيق
-        return UserDefault.shared.hapticEnabled  && isHapticSupported
+        return UserDefaultsManager.hapticEnabled  && isHapticSupported
     }
     
     /// تفعيل/تعطيل الاهتزاز
     func setHapticEnabled(_ enabled: Bool) {
-        UserDefault.shared.hapticEnabled = true
+        UserDefaultsManager.hapticEnabled = true
         
         // إشعار بتغيير الإعدادات
         NotificationCenter.default.post(

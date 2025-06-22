@@ -66,6 +66,7 @@
                                                 </subviews>
                                                 <constraints>
                                                     <constraint firstItem="2hK-v4-q8f" firstAttribute="leading" secondItem="WXB-mb-WGh" secondAttribute="leading" constant="5" id="MUm-jE-UzH"/>
+                                                    <constraint firstAttribute="width" secondItem="WXB-mb-WGh" secondAttribute="height" multiplier="345:50" id="QlA-ND-ZPR"/>
                                                     <constraint firstItem="2hK-v4-q8f" firstAttribute="top" secondItem="WXB-mb-WGh" secondAttribute="top" id="XlE-JH-JkS"/>
                                                     <constraint firstAttribute="bottom" secondItem="2hK-v4-q8f" secondAttribute="bottom" id="oNd-23-BPl"/>
                                                     <constraint firstAttribute="trailing" secondItem="2hK-v4-q8f" secondAttribute="trailing" constant="5" id="vcj-Ws-HQk"/>
@@ -73,9 +74,6 @@
                                                 </constraints>
                                             </view>
                                         </subviews>
-                                        <constraints>
-                                            <constraint firstItem="WXB-mb-WGh" firstAttribute="width" secondItem="WXB-mb-WGh" secondAttribute="height" multiplier="345:50" id="QlA-ND-ZPR"/>
-                                        </constraints>
                                     </stackView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="01E-BD-ufg">
                                         <rect key="frame" x="0.0" y="140.00000000000003" width="345" height="33.333333333333343"/>
@@ -339,6 +337,21 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="37.404580152671755" y="-2.1126760563380285"/>
+        </scene>
+        <!--Sign UpVC-->
+        <scene sceneID="0Sy-ic-U7m">
+            <objects>
+                <viewController storyboardIdentifier="SignUpVC" id="cVH-im-4MS" customClass="SignUpVC" customModule="HalaApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Urh-Nu-TJQ">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="xJC-m8-0Yk"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0b5-pV-Z59" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="763" y="-5"/>
         </scene>
     </scenes>
     <resources>

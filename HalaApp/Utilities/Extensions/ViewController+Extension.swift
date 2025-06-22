@@ -49,15 +49,7 @@
             }
         }
         
-        /// إظهار شريط التنقل
-        func showNavigationBar(animated: Bool = true) {
-            navigationController?.setNavigationBarHidden(false, animated: animated)
-        }
-        
-        /// إخفاء شريط التنقل
-        func hideNavigationBar(animated: Bool = true) {
-            navigationController?.setNavigationBarHidden(true, animated: animated)
-        }
+     
         
         /// الرجوع للواجهة السابقة
         func popViewController(animated: Bool = true) {

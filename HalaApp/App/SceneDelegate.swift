@@ -193,8 +193,8 @@ extension SceneDelegate {
     /// تحديد وعرض الواجهة المناسبة
     private func setupInitialViewController() {
         
-        let hasCompletedOnboarding = UserDefault.shared.hasCompletedOnboarding
-        let isLoggedIn = UserDefault.shared.isLoggedIn
+        let hasCompletedOnboarding = UserDefaultsManager.hasCompletedOnboarding
+        let isLoggedIn = UserDefaultsManager.isLoggedIn
         
         print("📊 حالة التطبيق:")
         print("   - مكمل التعريف: \(hasCompletedOnboarding ? "✅" : "❌")")

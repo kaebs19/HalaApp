@@ -20,10 +20,10 @@ class ThemeManager: NSObject {
 
     var currentTheme: ThemeMode  {
         get {
-            return UserDefault.shared.appThemeMode
+            return UserDefaultsManager.themeMode
         }
         set {
-            UserDefault.shared.appThemeMode = newValue
+            UserDefaultsManager.themeMode = newValue
             applyTheme(newValue)
             notifyThemeChange(newValue)
         }

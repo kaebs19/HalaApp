@@ -13,6 +13,7 @@ enum Alerts: String  {
     case RequiredPassword = "RequiredPasswordAlert"
     case RequiredEmail = "RequiredEmailAlert"
     case invalidMail = "InvalidEmailAlert"
+    case invalidPassword = "InvalidPasswordAlert"
     case Error = "ErrorAlert"
     case PleaseFillAllFields = "PleaseFillAllFieldsAlert"
     case PasswordDoesNotMatch = "PasswordDoesNotMatchAlert"
@@ -37,8 +38,10 @@ enum Alerts: String  {
     case Camera      = "CameraAlert"
     case PhotoLabary    = "PhotoLabaryAlert"
 
+    case Delete = "DeleteAlert"
+    case Refresh = "RefreshAlert"
+    case Skip = "SkipAlert"
     
- 
     
     var texts: String {
         return self.rawValue.localized

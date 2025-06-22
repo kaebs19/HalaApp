@@ -68,7 +68,7 @@ extension OnboardingVC {
     }
     
     private func completeOnboarding() {
-        UserDefault.shared.hasCompletedOnboarding = true
+        UserDefaultsManager.hasCompletedOnboarding = true
         AppNavigationManager.shared.completeOnboarding()
         print("🎉 تم إكمال التعريف")
     }

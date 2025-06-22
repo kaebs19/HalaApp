@@ -110,3 +110,19 @@
 "PhotoLabaryAlert" = "مكتبة الصور";
 "RequiredEmailAlert" = "البريد مطلوب";
 "RequiredPassword" = "كلمة السر مطلوب";
+
+"DeleteAlert" = "حذف";
+"RefreshAlert" = "تحديث";
+"SkipAlert" = "تخطي";
+"ConnectingBody" = "الاتصال";
+"InvalidPasswordAlert" = "كلمة المرور غير صالحة";
+
+// العناوين
+"LoginTitle" = "تسجيل الدخول";
+"SignupTitle" = "إنشاء حساب";
+"ForgotPasswordTitle" = "نسيت كلمة المرور";
+"HomeTitle" = "الصفحة الرئيسية";
+"ProfileTitle" = "الملف الشخصي";
+"SettingsTitle" = "الإعدادات";
+"NotificationsTitle" = "الإشعارات";
+"MessagesTitle" = "الرسائل";

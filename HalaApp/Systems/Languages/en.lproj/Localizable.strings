@@ -108,3 +108,19 @@
 "PhotoLabaryAlert"="Photo Labary";
 "RequiredEmailAlert" = "Required Email";
 "RequiredPassword" = "Required Password";
+
+"DeleteAlert" = "Delete";
+"RefreshAlert" = "Refresh";
+"SkipAlert" = "Skip";
+"ConnectingBody" = "connecting";
+"InvalidPasswordAlert" = "Invalid Password";
+
+// Titles
+"LoginTitle" = "Login";
+"SignupTitle" = "Sign Up";
+"ForgotPasswordTitle" = "Forgot Password";
+"HomeTitle" = "Home";
+"ProfileTitle" = "Profile";
+"SettingsTitle" = "Settings";
+"NotificationsTitle" = "Notifications";
+"MessagesTitle" = "Messages";

@@ -24,7 +24,7 @@ enum TitleMessage: String {
     case connecting = "ConnectingTitle"
     case updateAvailable = "UpdateAvailableTitle"
     case confirmDelete = "ConfirmDeleteTitle"
-    
+
   
     
     var title: String {
