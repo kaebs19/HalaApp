@@ -16,7 +16,7 @@
 "welcomeSubtitleLabel"="Login to your account";
 "createAccountLabel"="Create an account";
 "argeementLabel"="By clicking Sign up you agree to the following Terms and Conditions without reservation ";
-"iAgreeLabel"="I agree for";
+"iAgreeLabel"="By clicking Sign up you agree to the following Terms and Conditions without reservation ";
 "forgotPasswordSubtitleLabel" = "Please enter your email address. You will receive a link to create a new password via email.";
 "LogoutLable" = "Sign Out";
 "qrCodeSubtitleLabel" = "Hala Chat App users can scan this QR Code to add you as a friend.";
@@ -29,6 +29,7 @@
 "dontHaveAccountLabel" = "Don't Have an Account?";
 "continuationButton" = "Continuation";
 "orContinueWithLabel" = "------- or continue with ------";
+"selectDateLabel" = "select Date";
 
 // --   Buttons
 "HelpTitle"="Help";
@@ -48,8 +49,10 @@
 
 "EmailTFPlaceholder" = "Email";
 "PasswordTFPlaceholder" = "Password";
+"ConfirmPasswordTFPlaceholder" = "Confirm Password";
 "NameTFPlaceholder" = "Name";
-
+"UsernameTFPlaceholder" = "UserName";
+"DateOfBirthTFPlaceholder" = "date Of Birth";
 
 // Alert
 
@@ -78,6 +81,16 @@
 "DeleteConfirmationBody" = "Are you sure you want to delete this item? This action cannot be undone";
 "PleaseWaitBody" = "Please wait...";
 
+ "MinimumAgeBody" = "Age must be at least 1 year";
+ "MaximumAgeBody" = "Please check your date of birth.";
+ "AgeBody" = "Age";
+ "YearBody" = "Year";
+ "MonthBody" = "Month";
+ "DayBody" = "Day";
+"AgeHasBeenSetBody" = "Age has been set";
+"AgeIsInvalidBody" = "The age is incorrect.";
+"DateOfBirthBody" = "Date Of Birt";
+"UsernameAlert" = "Invalid username";
 
 // Alerts
 "EmailAlert" = "Email";
@@ -114,6 +127,7 @@
 "SkipAlert" = "Skip";
 "ConnectingBody" = "connecting";
 "InvalidPasswordAlert" = "Invalid Password";
+"DoneAlert" = "Done";
 
 // Titles
 "LoginTitle" = "Login";

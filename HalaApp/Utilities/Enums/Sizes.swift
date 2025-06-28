@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 enum Sizes: CGFloat, CaseIterable {
 
@@ -66,6 +67,30 @@ enum Sizes: CGFloat, CaseIterable {
         case .size_32, .size_34, .size_36, .size_40, .size_44, .size_48:
             return .extraLarge
         }
+    }
+    
+    /// حجم متجاوب حسب الجهاز - إضافة بسيطة
+    var responsive: CGFloat {
+        let baseSize = self.rawValue
+        
+        
+        // تقليل بسيط للـ iPad
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            return baseSize * 0.9  // تقليل 10% فقط
+        }
+        
+        return baseSize
+    }
+    
+    /// حجم مخصص حسب الجهاز
+    func custom(iPhone: CGFloat? = nil , iPad: CGFloat? = nil) -> CGFloat {
+        
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            return iPad ?? (self.rawValue * 0.9)
+        }
+        
+        return iPhone ?? self.rawValue
+
     }
 
 }

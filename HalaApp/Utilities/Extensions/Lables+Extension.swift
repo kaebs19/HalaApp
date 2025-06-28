@@ -13,10 +13,11 @@ extension UILabel {
     func setupCustomLable(text: String,
                           textColor: AppColors,
                           ofSize: Sizes,
-                          font: Fonts,
+                          font: Fonts = .cairo,
                           fontStyle: FontStyle = .regular,
                           alignment: Directions = .auto,
-                                                    numberOfLines: Int = 0
+                          numberOfLines: Int = 0,
+                          responsive: Bool = true
                          ) {
         
         self.text = text
@@ -28,14 +29,15 @@ extension UILabel {
         self.numberOfLines =                           numberOfLines
         self.allowsDefaultTighteningForTruncation = true
         self.adjustsFontForContentSizeCategory = true
+        
+        // اختيار الخط حسب التجاوب
+        if responsive {
+            self.font = FontManager.shared.responsiveFont(family: font, style: fontStyle, size: ofSize)
+        } else {
+            self.font = FontManager.shared.fontApp(family: font, style: fontStyle, size: ofSize)
+        }
+
     }
     
-    /// إعداد زر دائري
-    func makeCircular () {
-        
-        DispatchQueue.main.async {
-            self.layer.cornerRadius = min(self.frame.width, self.frame.height) / 2
-            self.clipsToBounds = true
-        }
-    }
+
 }

@@ -29,7 +29,7 @@ enum Lables: String {
     case iHaveReadAndAgree = "iHaveReadAndAgreeLabel"
     case dontHaveAccount = "dontHaveAccountLabel"
     case orContinueWith = "orContinueWithLabel"
-
+    case selectDate = "selectDateLabel"
     
     var textName: String {
           return self.rawValue.localized

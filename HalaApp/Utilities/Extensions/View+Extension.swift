@@ -58,4 +58,19 @@ extension UIView {
           layer.sublayers?.removeAll { $0 is CAGradientLayer }
           layer.insertSublayer(gradientLayer, at: 0)
       }
+    
+    
+    func getAllSubviews<T: UIView>(ofType type: T.Type) -> [T] {
+        var allSubviews: [T] = []
+        
+        for subview in subviews {
+            if let typedView = subview as? T {
+                allSubviews.append(typedView)
+            }
+            allSubviews.append(contentsOf: subview.getAllSubviews(ofType: type))
+        }
+        
+        return allSubviews
+    }
+
 }

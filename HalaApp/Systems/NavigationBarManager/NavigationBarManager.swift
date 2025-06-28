@@ -7,154 +7,20 @@
 
 import UIKit
 
-// MARK: - Navigation Configuration
-
-struct NavigationConfig {
-    var title: String?
-    var isLargeTitleEnabled: Bool = false
-    var leftButton: NavigationButton?
-    var rightButton: NavigationButton?
-    var backgroundColor: AppColors = .background
-    var titleColor: AppColors = .text
-    var tintColor: AppColors = .primary
-    var hideNavigationBar: Bool = false
-    var isTranslucent: Bool = true
-    
-    static let `default` = NavigationConfig()
-}
-
-
-// MARK: - Navigation Button Types
- enum NavigationButtonType {
-     case back
-     case close
-     case custom(icon: String , title: String? = nil)
-     case menu
-     case more
-     case done
-     case cancel
-     case next
-     case save
-     case notificaiton
-     case search
-     case info
-     case help
-     case skip
-     
-     var iconName: String {
-         switch self {
-             case .back:
-                 return LanguageManager.shared.isEnglish() ? "chevron.left" : "chevron.right"
-                 
-             case .close:
-                 return Images.close.imageName
-                 
-             case .custom(icon: let icon, _):
-                 return icon
-                 
-             case .menu:
-                 return Images.menu.imageName
-                 
-             case .more:
-                 return Images.morefill.imageName
-                 
-             case .done:
-                 return "checkmark"
-                 
-             case .cancel:
-                 return "xmark"
-
-             case .next:
-                 return LanguageManager.shared.isEnglish() ? "chevron.right" : "chevron.left"
-
-             case .save:
-                 return Images.save.imageName
-                 
-             case .notificaiton:
-                 return Images.notification.imageName
-                 
-             case .search:
-                 return Images.search.imageName
-                 
-             case .info:
-                 return "info.circle"
-
-             case .help:
-                 return "questionmark.circle"
-
-             case .skip:
-                 return "forward.fill"
-         }
-     }
-     
-     var title: String? {
-      
-         switch self {
-                 
-             case .back:
-                 return LanguageManager.shared.isEnglish() ? "Back" : "رجوع"
-             case .close:
-                 return LanguageManager.shared.isEnglish() ? "Close" : "إغلاق"
-             case .custom(_, let title):
-                 return title
-             case .menu:
-                 return LanguageManager.shared.isEnglish() ? "Menu" : "القائمة"
-             case .more:
-                 return LanguageManager.shared.isEnglish() ? "More" : "المزيد"
-             case .done:
-                 return LanguageManager.shared.isEnglish() ? "Done" : "إنهاء"
-             case .cancel:
-                 return LanguageManager.shared.isEnglish() ? "Cancel" : "الغاء"
-             case .next:
-                 return LanguageManager.shared.isEnglish() ? "Next" : "التالي"
-             case .save:
-                 return LanguageManager.shared.isEnglish() ? "Save" : "حفظ"
-             case .notificaiton:
-                 return LanguageManager.shared.isEnglish() ? "Notifications" : "الإشعارات"
-             case .search:
-                 return LanguageManager.shared.isEnglish() ? "Search" : "بحث"
-             case .info:
-                 return LanguageManager.shared.isEnglish() ? "Info" : "معلومات"
-             case .help:
-                 return LanguageManager.shared.isEnglish() ? "Help" : "مساعدة"
-             case .skip:
-                 return LanguageManager.shared.isEnglish() ? "Skip" : "تخطي"
-         }
-     }
-}
-
-// MARK: - Navigation Button Configuration
-struct NavigationButton {
-    
-    let type: NavigationButtonType
-    let action: (() -> Void)?
-    let isEnabled: Bool
-    let badge: String?
-    
-    init(type: NavigationButtonType, action: (() -> Void)?, isEnabled: Bool = true, badge: String? = nil) {
-        self.type = type
-        self.action = action
-        self.isEnabled = isEnabled
-        self.badge = badge
-    }
-}
-
 // MARK: - Navigation Bar Manager
 class NavigationBarManager {
     
-    
     // MARK: - Properties
-    private weak var viewController: UIViewController?
-    private var currentConfig:  NavigationConfig?
+    internal weak var viewController: UIViewController?
+    private var currentConfig: NavigationConfig?
     
     // MARK: - Initialization
-        init(viewController: UIViewController) {
-            self.viewController = viewController
+    init(viewController: UIViewController) {
+        self.viewController = viewController
     }
     
-    
     // MARK: - Public Methods
-        
+    
     /// إعداد شريط التنقل مع التكوين المحدد
     func configure(with config: NavigationConfig) {
         guard let vc = viewController else { return }
@@ -177,38 +43,77 @@ class NavigationBarManager {
         
         // إعداد المظهر
         setupAppearance(config: config)
-
     }
     
     /// إعداد سريع للعنوان فقط
     func setTitle(_ title: String, isLarge: Bool = false) {
         var config = currentConfig ?? .default
-            config.title = title
-            config.isLargeTitleEnabled = isLarge
-            configure(with: config)
+        config.title = title
+        config.isLargeTitleEnabled = isLarge
+        configure(with: config)
     }
     
     /// إعداد سريع لزر الرجوع
     func setBackButton(action: (() -> Void)? = nil) {
         var config = currentConfig ?? .default
-        config.leftButton = NavigationButton(type: .back, action: action ?? defaultBackAction)
+        config.leftButton = NavigationButton(type: .back(), action: action ?? handleBackButton)
         configure(with: config)
     }
     
     /// إعداد سريع لزر الإغلاق
     func setCloseButton(action: (() -> Void)? = nil) {
         var config = currentConfig ?? .default
-        config.leftButton = NavigationButton(type: .close, action: action ?? defaultCloseAction)
+        config.leftButton = NavigationButton(type: .close(), action: action ?? handleCloseButton)
         configure(with: config)
     }
     
     /// إعداد سريع لزر في الجهة اليمنى
     func setRightButton(type: NavigationButtonType, action: @escaping () -> Void) {
         var config = currentConfig ?? .default
-            config.rightButton = NavigationButton(type: type, action: action)
-            configure(with: config)
+        config.rightButton = NavigationButton(type: type, action: action)
+        configure(with: config)
     }
     
+    /// إعداد أزرار متعددة مع دعم تغيير الاتجاه حسب اللغة
+    func setMultipleButtons(
+        items: [NavigationButtonType],
+        title: Title? = nil,
+        isLargeTitle: Bool = false,
+        actions: [NavigationButtonType: () -> Void] = [:]
+    ) {
+        var config = currentConfig ?? .default
+        
+        // إعداد العنوان
+        if let title = title {
+            config.title = title.TextTitle
+            config.isLargeTitleEnabled = isLargeTitle
+        }
+        
+        var leftButtons: [NavigationButton] = []
+        var rightButtons: [NavigationButton] = []
+        
+        // تصنيف الأزرار حسب النوع
+        for item in items {
+            let action = actions[item] ?? getDefaultAction(for: item)
+            let button = NavigationButton(type: item, action: action)
+            
+            // تحديد موقع الزر حسب نوعه
+            if item.defaultPosition == .left {
+                leftButtons.append(button)
+            } else {
+                rightButtons.append(button)
+            }
+        }
+        
+        // تطبيق الأزرار مع مراعاة اللغة
+        applyMultipleButtons(
+            config: &config,
+            leftButtons: leftButtons,
+            rightButtons: rightButtons
+        )
+        
+        configure(with: config)
+    }
     
     // MARK: - Private Methods
     
@@ -227,18 +132,65 @@ class NavigationBarManager {
     private func setupButtons(config: NavigationConfig) {
         guard let vc = viewController else { return }
         
-        // إعداد الزر الأيسر
-        if let leftButton = config.leftButton {
-            vc.navigationItem.leftBarButtonItem = createBarButtonItem(from: leftButton)
-        } else {
-            vc.navigationItem.leftBarButtonItem = nil
+        // إعداد الأزرار المتعددة أولاً إذا وجدت
+        let hasLeftButtons = config.leftButtons?.isEmpty == false
+        let hasRightButtons = config.rightButtons?.isEmpty == false
+        
+        if hasLeftButtons || hasRightButtons {
+            setupMultipleButtons(config: config)
+            return
         }
         
-        // إعداد الزر الأيمن
-        if let rightButton = config.rightButton {
-            vc.navigationItem.rightBarButtonItem = createBarButtonItem(from: rightButton)
+        // إعداد الزر الأيسر/الأيمن حسب اللغة (للأزرار المفردة)
+        let isRTL = !LanguageManager.shared.isEnglish()
+        
+        if isRTL {
+            // في العربية: الزر الأساسي على اليمين
+            if let leftButton = config.leftButton {
+                vc.navigationItem.rightBarButtonItem = createBarButtonItem(from: leftButton)
+            } else {
+                vc.navigationItem.rightBarButtonItem = nil
+            }
+            
+            if let rightButton = config.rightButton {
+                vc.navigationItem.leftBarButtonItem = createBarButtonItem(from: rightButton)
+            } else {
+                vc.navigationItem.leftBarButtonItem = nil
+            }
         } else {
-            vc.navigationItem.rightBarButtonItem = nil
+            // في الإنجليزية: الترتيب العادي
+            if let leftButton = config.leftButton {
+                vc.navigationItem.leftBarButtonItem = createBarButtonItem(from: leftButton)
+            } else {
+                vc.navigationItem.leftBarButtonItem = nil
+            }
+            
+            if let rightButton = config.rightButton {
+                vc.navigationItem.rightBarButtonItem = createBarButtonItem(from: rightButton)
+            } else {
+                vc.navigationItem.rightBarButtonItem = nil
+            }
+        }
+    }
+    
+    /// إعداد الأزرار المتعددة
+    private func setupMultipleButtons(config: NavigationConfig) {
+        guard let vc = viewController else { return }
+        
+        let isRTL = !LanguageManager.shared.isEnglish()
+        
+        // تحويل الأزرار إلى UIBarButtonItem
+        let leftBarButtons = (config.leftButtons ?? []).compactMap { createBarButtonItem(from: $0) }
+        let rightBarButtons = (config.rightButtons ?? []).compactMap { createBarButtonItem(from: $0) }
+        
+        if isRTL {
+            // في العربية: عكس المواقع
+            vc.navigationItem.leftBarButtonItems = rightBarButtons
+            vc.navigationItem.rightBarButtonItems = leftBarButtons
+        } else {
+            // في الإنجليزية: الترتيب العادي
+            vc.navigationItem.leftBarButtonItems = leftBarButtons
+            vc.navigationItem.rightBarButtonItems = rightBarButtons
         }
     }
     
@@ -254,7 +206,10 @@ class NavigationBarManager {
                 action: #selector(buttonTapped(_:))
             )
         } else {
-            let image = UIImage(systemName: button.type.iconName)
+            // اختيار مصدر الصورة (Assets أم النظام)
+            let image = getThemedImage(for: button.type)
+
+            
             barButtonItem = UIBarButtonItem(
                 image: image,
                 style: .plain,
@@ -275,13 +230,53 @@ class NavigationBarManager {
         
         return barButtonItem
     }
+    
+    // أضف هذه الدالة في NavigationBarManager
+    private func getThemedImage(for buttonType: NavigationButtonType) -> UIImage? {
+        let size: CGFloat = 24
+        
+        // الأيقونات المخصصة من Assets مع دعم الثيم
+        if !buttonType.isSystemIcon {
+            switch buttonType {
+            case .close:
+                return ImageManager.image(.close)?.resized(to: CGSize(width: size, height: size))
+            case .menu:
+                return ImageManager.image(.menu)?.resized(to: CGSize(width: size, height: size))
+            case .more:
+                return ImageManager.image(.morefill)?.resized(to: CGSize(width: size, height: size))
+            case .save:
+                return ImageManager.image(.save)?.resized(to: CGSize(width: size, height: size))
+            case .notificaiton:
+                return ImageManager.image(.notification)?.resized(to: CGSize(width: size, height: size))
+            case .search:
+                return ImageManager.image(.search)?.resized(to: CGSize(width: size, height: size))
+            case .back:
+                return ImageManager.image(.back)?.resized(to: CGSize(width: size, height: size))
+            default:
+                break
+            }
+        }
+        
+        // أيقونات النظام مع لون الثيم
+        let systemImage = UIImage(systemName: buttonType.iconName)?
+            .withConfiguration(UIImage.SymbolConfiguration(pointSize: size))
+        
+        // تطبيق لون حسب الثيم
+        let themeColor = getThemeBasedTintColor()
+        return systemImage?.withTintColor(themeColor.color, renderingMode: .alwaysOriginal)
+    }
 
+    // دالة مساعدة للحصول على لون الثيم
+    private func getThemeBasedTintColor() -> AppColors {
+        let isDark = ThemeManager.shared.isDarkModeActive
+        return isDark ? .textSecondary : .primary
+    }
     
     private func setupAppearance(config: NavigationConfig) {
         guard let navigationBar = viewController?.navigationController?.navigationBar else { return }
         
         let appearance = UINavigationBarAppearance()
-    
+        
         if config.isTranslucent {
             appearance.configureWithDefaultBackground()
         } else {
@@ -295,10 +290,10 @@ class NavigationBarManager {
         navigationBar.standardAppearance = appearance
         navigationBar.scrollEdgeAppearance = appearance
         navigationBar.compactAppearance = appearance
-        navigationBar.tintColor = config.titleColor.color
+        navigationBar.tintColor = config.tintColor.color
     }
     
-    private func addBadge(to barButtonItem: UIBarButtonItem , text: String) {
+    private func addBadge(to barButtonItem: UIBarButtonItem, text: String) {
         // يمكن تحسينها لاحقاً لإضافة بادج مخصص
         // حالياً نضيف النص للعنوان
         if let currentTitle = barButtonItem.title {
@@ -306,30 +301,39 @@ class NavigationBarManager {
         }
     }
     
-    
-     @objc private func buttonTapped(_ sender: UIBarButtonItem) {
-         if let action = objc_getAssociatedObject(sender, &AssociatedKeys.buttonAction) as? (() -> Void) {
-             action()
-         }
-     }
-    
-    // MARK: - Default Actions
-    private func defaultBackAction() {
-        viewController?.navigationController?.popViewController(animated: true)
+    @objc private func buttonTapped(_ sender: UIBarButtonItem) {
+        if let action = objc_getAssociatedObject(sender, &AssociatedKeys.buttonAction) as? (() -> Void) {
+            action()
+        }
     }
     
-    private func defaultCloseAction() {
-        if viewController?.navigationController?.viewControllers.count == 1 {
-            viewController?.dismiss(animated: true)
+    // MARK: - Multiple Buttons Helper Methods
+    
+    /// تطبيق الأزرار المتعددة مع مراعاة اتجاه اللغة
+    private func applyMultipleButtons(
+        config: inout NavigationConfig,
+        leftButtons: [NavigationButton],
+        rightButtons: [NavigationButton]
+    ) {
+        // في العربية نعكس المواقع
+        let isRTL = !LanguageManager.shared.isEnglish()
+        
+        if isRTL {
+            // في العربية: الأزرار الأساسية (رجوع/قائمة) على اليمين
+            config.rightButtons = leftButtons
+            config.leftButtons = rightButtons
         } else {
-            viewController?.navigationController?.popViewController(animated: true)
-    }
+            // في الإنجليزية: الترتيب العادي
+            config.leftButtons = leftButtons
+            config.rightButtons = rightButtons
+        }
     }
 }
 
 // MARK: - Associated Keys
 private struct AssociatedKeys {
     static var buttonAction = "buttonAction"
+    static var navigationManager = "navigationManager"
 }
 
 // MARK: - UIViewController Extension
@@ -343,7 +347,6 @@ extension UIViewController {
         let manager = NavigationBarManager(viewController: self)
         objc_setAssociatedObject(self, &AssociatedKeys.navigationManager, manager, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         return manager
-
     }
     
     /// إعداد شريط التنقل مع تكوين مخصص
@@ -363,42 +366,50 @@ extension UIViewController {
     
     /// إعداد سريع لزر الرجوع
     func setNavigationBackButton(action: (() -> Void)? = nil) {
-           navigationManager.setBackButton(action: action)
+        navigationManager.setBackButton(action: action)
     }
     
     /// إعداد سريع لزر الإغلاق
     func setNavigationCloseButton(action: (() -> Void)? = nil) {
         navigationManager.setCloseButton(action: action)
     }
-
+    
     /// إعداد سريع لزر في الجهة اليمنى
     func setNavigationRightButton(type: NavigationButtonType, action: @escaping () -> Void) {
         navigationManager.setRightButton(type: type, action: action)
     }
-
+    
+    /// إعداد أزرار متعددة مع دعم اللغة والاتجاه (مُبسط)
+    func setNavigationButtons(
+        items: [NavigationButtonType],
+        title: Title? = nil,
+        isLargeTitle: Bool = false,
+        actions: [NavigationButtonType: () -> Void] = [:]
+    ) {
+        navigationManager.setMultipleButtons(
+            items: items,
+            title: title,
+            isLargeTitle: isLargeTitle,
+            actions: actions
+        )
+    }
+    
     /// إخفاء شريط التنقل
     func hideNavigationBar(animated: Bool = true) {
         navigationController?.setNavigationBarHidden(true, animated: animated)
     }
-
+    
     /// إظهار شريط التنقل
     func showNavigationBar(animated: Bool = true) {
         navigationController?.setNavigationBarHidden(false, animated: animated)
     }
-
 }
-
-// MARK: - Associated Keys Extension
-private extension AssociatedKeys {
-    static var navigationManager = "navigationManager"
-}
-
 
 // MARK: - Quick Setup Examples
 /*
  
- 📱 أمثلة الاستخدام:
- =================
+ 📱 أمثلة الاستخدام المُبسطة:
+ ==========================
  
  // 1️⃣ إعداد بسيط للعنوان فقط
  setNavigationTitle(.settings)
@@ -406,57 +417,49 @@ private extension AssociatedKeys {
  // 2️⃣ إعداد عنوان كبير
  setNavigationTitle(.home, isLarge: true)
  
- // 3️⃣ إعداد زر رجوع
- setNavigationBackButton()
+ // 3️⃣ إعداد زر رجوع + زر حفظ (بدون actions - ستستخدم الافتراضية)
+ setNavigationButtons(items: [.back, .save], title: .settings)
  
- // 4️⃣ إعداد زر رجوع مع إجراء مخصص
- setNavigationBackButton {
-     // إجراء مخصص قبل الرجوع
-     print("حفظ البيانات...")
-     navigationController?.popViewController(animated: true)
- }
- 
- // 5️⃣ إعداد زر إغلاق
- setNavigationCloseButton()
- 
- // 6️⃣ إعداد زر في الجهة اليمنى
- setNavigationRightButton(type: .save) {
-     saveData()
- }
- 
- // 7️⃣ إعداد مخصص كامل
- let config = NavigationConfig(
-     title: "الرسائل",
-     isLargeTitleEnabled: true,
-     leftButton: NavigationButton(type: .back) { [weak self] in
-         self?.navigationController?.popViewController(animated: true)
-     },
-     rightButton: NavigationButton(type: .more) { [weak self] in
-         self?.showMoreOptions()
-     },
-     backgroundColor: .background,
-     titleColor: .text,
-     tintColor: .primary
+ // 4️⃣ إعداد زر رجوع + زر حفظ (مع actions مخصصة)
+ setNavigationButtons(
+     items: [.back, .save],
+     title: .settings,
+     actions: [
+         .save: { [weak self] in
+             self?.saveSettings()
+         }
+     ]
  )
- setupNavigationBar(with: config)
  
- // 8️⃣ إخفاء شريط التنقل
- hideNavigationBar()
+ // 5️⃣ إعداد قائمة + بحث + إشعارات (افتراضية)
+ setNavigationButtons(items: [.menu, .search, .notificaiton], title: .home, isLargeTitle: true)
  
- // 9️⃣ إعداد زر مخصص
- setNavigationRightButton(type: .custom(icon: "person.circle", title: "Profile")) {
-     goToProfile()
- }
+ // 6️⃣ إعداد إغلاق + التالي (افتراضية)
+ setNavigationButtons(items: [.close, .next])
  
- // 🔟 إعداد متقدم مع عدة أزرار
- let advancedConfig = NavigationConfig(
-     title: "تفاصيل الرسالة",
-     leftButton: NavigationButton(type: .back),
-     rightButton: NavigationButton(type: .more, badge: "3"),
-     backgroundColor: .secondBackground,
-     titleColor: .text,
-     tintColor: .accent
+ // 7️⃣ إعداد زر مخصص
+ setNavigationButtons(
+     items: [.back, .custom(icon: "person.circle", title: "Profile")],
+     actions: [
+         .custom(icon: "person.circle", title: "Profile"): { [weak self] in
+             self?.showProfile()
+         }
+     ]
  )
- setupNavigationBar(with: advancedConfig)
+ 
+ // 8️⃣ إعداد متقدم مع عدة أزرار وإجراءات مختلطة
+ setNavigationButtons(
+     items: [.menu, .save, .more, .notificaiton],
+     title: .dashboard,
+     actions: [
+         .save: { [weak self] in
+             self?.saveData()
+         },
+         .more: { [weak self] in
+             self?.showCustomMoreOptions()
+         }
+         // .menu و .notificaiton ستستخدم الإجراءات الافتراضية
+     ]
+ )
  
  */

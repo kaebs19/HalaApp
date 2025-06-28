@@ -41,7 +41,8 @@ enum Alerts: String  {
     case Delete = "DeleteAlert"
     case Refresh = "RefreshAlert"
     case Skip = "SkipAlert"
-    
+    case done = "DoneAlert"
+    case username = "UsernameAlert"
     
     var texts: String {
         return self.rawValue.localized

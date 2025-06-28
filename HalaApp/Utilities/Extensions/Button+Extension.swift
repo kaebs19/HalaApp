@@ -17,7 +17,9 @@ extension UIButton {
                            font: Fonts,
                            fontStyle: FontStyle = .regular,
                            alignment: Directions = .auto,
-                           enablePressAnimation: Bool = true
+                           enablePressAnimation: Bool = true,
+                           responsive: Bool = true  // خيار جديد للتجاوب
+
     ) {
         
         self.setTitle(title.titleButton, for: .normal)
@@ -25,7 +27,13 @@ extension UIButton {
 
         self.backgroundColor = backgroundColor?.color
         
-        
+        // اختيار الخط حسب التجاوب
+        if responsive {
+            self.titleLabel?.font = FontManager.shared.responsiveFont(family: font, style: fontStyle, size: ofSize)
+        } else {
+            self.titleLabel?.font = FontManager.shared.fontApp(family: font, style: fontStyle, size: ofSize)
+        }
+
         
         self.titleLabel?.font = FontManager.shared.fontApp(family: font, style: fontStyle, size: ofSize)
         self.titleLabel?.textAlignment = alignment.textAlignment
@@ -68,6 +76,50 @@ extension UIButton {
             self.alpha = 1.0
         }
     }
+
+    /// تعيين صورة للزر مع دعم الثيم
+    func setImage(_ imageName: Images, for state: UIControl.State = .normal, theme: ThemeManager.ThemeMode? = nil) {
+        let image = ImageManager.image(imageName, for: theme)
+        self.setImage(image, for: state)
+    }
+    
+    /// تعيين صورة مع لون للزر
+    func setImage(_ imageName: Images, tintColor: AppColors, for state: UIControl.State = .normal) {
+        let image = ImageManager.image(imageName, tintColor: tintColor)
+        self.setImage(image, for: state)
+    }
+    
+    /// تعيين صورة للزر باستخدام التكوين
+       func setImage(configuration: ImageConfiguration, for state: UIControl.State = .normal) {
+           let image = configuration.generateImage()
+           self.setImage(image, for: state)
+       }
+       
+       /// تعيين أيقونة التنقل للزر
+       func setNavigationIcon(_ imageName: Images, size: CGFloat = 24, for state: UIControl.State = .normal) {
+           setImage(configuration: .navigationIcon(imageName, size: size), for: state)
+       }
+    
+    /// تعيين صورة من Assets للزر مع دعم الثيم
+    func setImageFromAssets(_ imageName: String, for state: UIControl.State = .normal, tintColor: AppColors? = nil) {
+        if let tintColor = tintColor {
+            self.setImage(ImageManager.imageFromAssets(imageName, tintColor: tintColor), for: state)
+        } else {
+            self.setImage(ImageManager.imageFromAssets(imageName), for: state)
+        }
+    }
+    
+    /// تعيين صورة من Assets بحجم محدد
+    func setImageFromAssets(_ imageName: String, size: CGSize, for state: UIControl.State = .normal, tintColor: AppColors? = nil) {
+        var image = ImageManager.imageFromAssets(imageName, size: size)
+        
+        if let tintColor = tintColor {
+            image = image?.withTintColor(tintColor.color)
+        }
+        
+        self.setImage(image, for: state)
+    }
+
 
     
 }

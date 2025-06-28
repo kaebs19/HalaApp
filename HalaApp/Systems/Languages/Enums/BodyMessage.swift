@@ -20,6 +20,16 @@ enum BodyMessage: String {
     case deleteConfirmation = "DeleteConfirmationBody"
     case pleaseWait = "PleaseWaitBody"
     
+    case dateOfBirth = "DateOfBirthBody"
+    case minimumAge = "MinimumAgeBody"
+    case maximumAge = "MaximumAgeBody"
+    case age = "AgeBody"
+    case year = "YearBody"
+    case month = "MonthBody"
+    case day = "DayBody"
+    case ageHasBeenSet = "AgeHasBeenSetBody"
+    case ageIsInvalid = "AgeIsInvalidBody"
+    
     var textMessage: String {
         return self.rawValue.localized
     }

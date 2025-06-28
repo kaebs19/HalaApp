@@ -28,6 +28,8 @@ class OnboardingVC: UIViewController {
         setupUI()
         loadInitialContent()
         print("✅ عرض واجهة التعريف")
+        makeResponsive()
+
     }
     
     deinit {
@@ -37,6 +39,8 @@ class OnboardingVC: UIViewController {
 
 // MARK: - Actions
 extension OnboardingVC {
+    
+    
     
     @IBAction func nextButtonTapped(_ sender: Any) {
         handleNextButtonTap()
@@ -83,6 +87,8 @@ extension OnboardingVC {
         setupImages()
         setupButtons()
         hideNavigationBar()
+        
+        
     }
     
     private func setupLabels() {
@@ -90,6 +96,7 @@ extension OnboardingVC {
         titleLabel.textAlignment = .center
         titleLabel.adjustsFontSizeToFitWidth = true
         titleLabel.minimumScaleFactor = 0.8
+        
         
         datilsLabel.numberOfLines = 0
         datilsLabel.textAlignment = .center
@@ -154,27 +161,35 @@ extension OnboardingVC {
     private func performAnimatedUpdate(with onboarding: Onboarding) {
         isAnimating = true
         
-        // انيميشن الخروج
-        UIView.animate(withDuration: 0.3, animations: {
-            self.animitionIMageView.alpha = 0
-            self.titleLabel.alpha = 0
-            self.datilsLabel.alpha = 0
-            self.animitionIMageView.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
-        }) { _ in
-            // تحديث المحتوى
-            self.setContent(with: onboarding)
-            
-            // انيميشن الدخول
-            UIView.animate(withDuration: 0.3, delay: 0.1, options: .curveEaseOut, animations: {
-                self.animitionIMageView.alpha = 1
-                self.titleLabel.alpha = 1
-                self.datilsLabel.alpha = 1
-                self.animitionIMageView.transform = .identity
-            }) { _ in
+        updateContentAnimated(
+            views: [animitionIMageView ,titleLabel , datilsLabel],
+            contentUpdate: {self.setContent(with: onboarding)}) {
                 self.isAnimating = false
-                self.animateNextButton()
+                self.animateNavigationArrow(arrowView: self.imageNextView)
             }
-        }
+        
+        // انيميشن الخروج
+//        UIView.animate(withDuration: 0.3, animations: {
+//            self.animitionIMageView.alpha = 0
+//            self.titleLabel.alpha = 0
+//            self.datilsLabel.alpha = 0
+//            self.animitionIMageView.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+//        }) { _ in
+//            // تحديث المحتوى
+//            self.setContent(with: onboarding)
+//            
+//            // انيميشن الدخول
+//            UIView.animate(withDuration: 0.3, delay: 0.1, options: .curveEaseOut, animations: {
+//                self.animitionIMageView.alpha = 1
+//                self.titleLabel.alpha = 1
+//                self.datilsLabel.alpha = 1
+//                self.animitionIMageView.transform = .identity
+//            }) { _ in
+//                self.isAnimating = false
+//                self.animateNextButton()
+//            }
+//        }
+//        
     }
     
     private func performStaticUpdate(with onboarding: Onboarding) {
@@ -197,7 +212,7 @@ extension OnboardingVC {
         datilsLabel.setupCustomLable(
             text: onboarding.description,
             textColor: .text,
-            ofSize: .size_16,
+            ofSize: .size_20,
             font: .tajawal , fontStyle: .medium ,
             alignment: .center
         )
@@ -232,7 +247,8 @@ extension OnboardingVC {
     
     override func updateUIForCurrentTheme() {
         view.setBackgroundColor(.background)
-        
+        titleLabel.textColor = .appColor(.text)
+        datilsLabel.textColor = .appColor(.text)
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {

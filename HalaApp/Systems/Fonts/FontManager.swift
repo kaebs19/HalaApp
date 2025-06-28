@@ -73,6 +73,28 @@ class FontManager {
         return fontApp(family: .cairo, style: .extraBold, size: .size_16)
     }
     
+    // تحديث الخطوط الموجودة ليصبح responsive
+    var responsiveTitleFont: UIFont {
+        return responsiveFont(family: .cairo, style: .extraBold, size: .size_22)
+    }
+    
+    var responsiveSubTitleFont: UIFont {
+        return responsiveFont(family: .cairo, style: .bold, size: .size_18)
+    }
+    
+    var responsiveBodyFont: UIFont {
+        return responsiveFont(family: .cairo, style: .regular, size: .size_16)
+    }
+    
+    var responsiveButtonFont: UIFont {
+        return responsiveFont(family: .cairo, style: .extraBold, size: .size_16)
+    }
+    
+    var responsiveCaptionFont: UIFont {
+        return responsiveFont(family: .cairo, style: .regular, size: .size_12)
+    }
+
+    
     // MARK: - الخطوط حسب اللغة
 
     func fontForCurrentLanguage(style: FontStyle, size: Sizes) -> UIFont {
@@ -91,6 +113,19 @@ class FontManager {
 
     }
     
+    /// خط متجاوب - إضافة بسيطة للنظام الحالي
+    func responsiveFont(family: Fonts = .cairo, style: FontStyle = .regular, size: Sizes) -> UIFont {
+        let responsiveSize = size.responsive  // استخدام الخاصية الجديدة
+        
+        let fontName = "\(family.name)-\(style.rawValue)"
+        
+        if let font = UIFont(name: fontName, size: responsiveSize) {
+            return font
+        } else {
+            return UIFont.systemFont(ofSize: responsiveSize, weight: style.uiFontWeight)
+        }
+    }
+
     
     /// التحقق من توفر جميع الخطوط المسجلة
     func printAvailableFonts() {

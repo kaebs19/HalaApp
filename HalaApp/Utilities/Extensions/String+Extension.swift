@@ -42,6 +42,22 @@ extension String {
         return self.count >= minLength && hasUppercase && hasLowercase && hasNumbers
     }
     
+    /// تحويل الأرقام العربية إلى إنجليزية
+
+    func convertArabicToEnglishNumbers() -> String {
+        let arabicNumbers = ["٠", "١", "٢", "٣", "٤", "٥", "٦", "٧", "٨", "٩"]
+        let englishNumbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
+        
+        var result = self
+        
+        for (arabic, english) in zip(arabicNumbers, englishNumbers) {
+            result = result.replacingOccurrences(of: arabic, with: english)
+        }
+        
+        return result
+    }
+
+    
     // MARK: - Phone Validation
     /// التحقق من رقم الهاتف السعودي
     var isValidSaudiPhone: Bool {
@@ -78,6 +94,14 @@ extension String {
         }
         return false
     }
+    
+    /// التحقق من أن النص يحتوي على أرقام إنجليزية فقط
+    var containsOnlyEnglishNumbers: Bool {
+        let numberRegex = "^[0-9]*$"
+        let numberPredicate = NSPredicate(format: "SELF MATCHES %@", numberRegex)
+        return numberPredicate.evaluate(with: self)
+    }
+
     
     // MARK: - Formatting
     /// تنسيق رقم الهاتف السعودي
@@ -212,4 +236,53 @@ extension String {
         
         return .valid
     }
+  
+}
+
+extension String {
+    
+    
+    // MARK: - Age Validation
+    
+    
+    /// التحقق من العمر باستخدام تاريخ
+    static func validateAge(from date: Date, minimumAge: Int = 13, maximumAge: Int = 80) -> ValidationResult {
+        let age = calculateAge(from: date)
+        
+        if age < minimumAge {
+            return .invalid(message: "\(BodyMessage.minimumAge.textMessage )")
+        }
+        
+        if age > maximumAge {
+            return .invalid(message: BodyMessage.maximumAge.textMessage)
+        }
+        
+        return .valid
+    }
+    
+    
+    /// حساب العمر من تاريخ معين
+    static func calculateAge(from date: Date) -> Int {
+        let calendar = Calendar.current
+        let ageComponents = calendar.dateComponents([.year], from: Date())
+        return ageComponents.year ?? 0
+                                                
+    }
+    
+    /// تنسيق التاريخ للعرض بالعربية
+    static func formatArabicDate(_ date: Date , style: DateFormatter.Style = .full) ->String {
+        
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "ar_SA")
+        formatter.dateStyle = style
+        return formatter.string(from: date)
+    }
+    
+    /// إنشاء نص العمر للعرض
+    static func ageDisplayText(form date: Date) -> String {
+        let age = calculateAge(from: date)
+        return " \(BodyMessage.age.textMessage) \(age) \(BodyMessage.year.textMessage)"
+    }
+
+    
 }

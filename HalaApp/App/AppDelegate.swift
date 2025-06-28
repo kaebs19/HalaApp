@@ -7,6 +7,8 @@
 
 import UIKit
 import MOLH
+import IQKeyboardManagerSwift
+import IQKeyboardReturnManager
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate{
@@ -18,8 +20,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
         // chack lanague
         MOLH.shared.activate(true)
         
+        // إعداد IQKeyboardManager باستخدام الـ Extension
+        IQKeyboardManager.setupDefault()
 
         
+
         return true
     }
 

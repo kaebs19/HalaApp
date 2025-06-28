@@ -12,7 +12,10 @@ enum Placeholders: String {
     case empty = ""
     case email = "EmailTFPlaceholder"
     case password = "PasswordTFPlaceholder"
+    case confirmPassword = "ConfirmPasswordTFPlaceholder"
     case name = "NameTFPlaceholder"
+    case username = "UsernameTFPlaceholder"
+    case dateOfBirth = "DateOfBirthTFPlaceholder"
 
     var PlaceholderText: String {
         return self.rawValue.localized

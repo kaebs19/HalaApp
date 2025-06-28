@@ -29,8 +29,6 @@ class LoginVC: UIViewController {
     @IBOutlet weak var socialMediaGoorleImageView: UIImageView!
     @IBOutlet weak var socialMediaAppleImageView: UIImageView!
     
-    @IBOutlet weak var iHaveReadAndAgreeLabel: UILabel!
-    @IBOutlet weak var termsAndConditionsButton: UIButton!
     
     @IBOutlet weak var rememberButton: UIButton!
     @IBOutlet weak var loginWithGoogleButton: UIButton!
@@ -52,8 +50,14 @@ class LoginVC: UIViewController {
         setupUI()
         setupThemeObserver()
         print("✅ عرض واجهة تسجيل الدخول")
-               
+        
+        makeResponsive()
+
+        // اخفاء لوحة المفاتح
+        setupDismissKeyboardGesture()
+        
     }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
@@ -91,7 +95,7 @@ extension LoginVC {
         setupViews()
         setupLables()
         setupTextFields()
-        setupButton()
+        setupButtons()
         setupImageViews()
     }
     
@@ -118,42 +122,51 @@ extension LoginVC {
             textColor: .text,
             ofSize: .size_18,
             font: .cairo ,
-            fontStyle: .bold ,)
+            fontStyle: .bold ,
+            responsive: true
+        )
         
         subtitleLabel.setupCustomLable(
             text: Lables.welcomeSubtitle.textName,
             textColor: .text,
             ofSize: .size_12,
-            font: .cairo)
+            font: .cairo,
+            responsive: true
+        )
         
         rememberLabel.setupCustomLable(
             text: Lables.rememberMe.textName,
             textColor: .text,
             ofSize: .size_12,
-            font: .cairo)
+            font: .cairo,
+            responsive: true
+        )
         
-        iHaveReadAndAgreeLabel.setupCustomLable(
-            text: Lables.iHaveReadAndAgree.textName,
-            textColor: .text,
-            ofSize: .size_12,
-            font: .cairo)
+     
         
         IDontHaveAccountLable.setupCustomLable(
             text: Lables.dontHaveAccount.textName,
             textColor: .text,
             ofSize: .size_12,
-            font: .cairo)
+            font: .cairo,
+            responsive: true
+        )
         
         orLabel.setupCustomLable(
             text: Lables.orContinueWith.textName,
             textColor: .text, ofSize: .size_14,
             font: .cairo ,
             fontStyle: .bold ,
-            alignment: .center)
+            alignment: .center,
+            responsive: true
+        )
     }
     
+    
+    
     private func setupTextFields() {
-        emailTextField.setupCustomTextField(placeholder: .email)
+
+        emailTextField.setupCustomTextField(placeholder: .email , keyboardType: .emailAddress)
         passwordTextField.setupAsPasswordField()
 
         // إضافة هدف للتحقق من صحة البيانات أثناء الكتابة
@@ -166,14 +179,15 @@ extension LoginVC {
         selectImageView.tintColor = AppColors.primary.color
     }
     
-    private func setupButton() {
+    private func setupButtons() {
         loginButton.setupCustomButton(
             title: .login,
             titleColor: .buttonText,
             backgroundColor: .primary,
             ofSize: .size_18,
             font: .cairo ,
-            fontStyle: .extraBold
+            fontStyle: .extraBold,
+            responsive: true
         )
         
         loginButton.applyGradientBackground(
@@ -186,19 +200,15 @@ extension LoginVC {
             title: .forgotPassword,
             titleColor: .primary,
             ofSize: .size_12,
-            font: .cairo
+            font: .cairo,
+            responsive: true
         )
         
         signupButton.setupCustomButton(
             title: .signup,
             titleColor: .primary,
             ofSize: .size_12, font: .cairo)
-        termsAndConditionsButton.setupCustomButton(
-            title: .terms,
-            titleColor: .primary,
-            ofSize: .size_12,
-            font: .cairo
-        )
+     
        
         
         // إضافة الأهداف
@@ -212,13 +222,53 @@ extension LoginVC {
  
     
     private func addButtonTargets() {
-        loginButton.addTarget(self, action: #selector(loginTappedloginTapped), for: .touchUpInside)
+        loginButton.addTarget(self, action: #selector(loginTapped), for: .touchUpInside)
         forgetPasswordButton.addTarget(self, action: #selector(forgetPasswordTapped), for: .touchUpInside)
         signupButton.addTarget(self, action: #selector(signupTapped), for: .touchUpInside)
         rememberButton.addTarget(self, action: #selector(rememberTapped), for: .touchUpInside)
-        termsAndConditionsButton.addTarget(self, action: #selector(termasTapped), for: .touchUpInside)
         loginWithGoogleButton.addTarget(self, action: #selector(loginWithGoogleTapped), for: .touchUpInside)
         loginWithAppleButton.addTarget(self, action: #selector(loginWithAppleTapped), for: .touchUpInside)
+        
+        // إعداد الزر التفاعلي باستخدام AnimationManager
+        setupInteractiveButton(
+            loginButton,
+            tapAction: #selector(loginTapped),
+            hapticFeedback: true
+        )
+
+        // نسيت كلمة المرور
+        setupInteractiveButton(
+            forgetPasswordButton,
+            tapAction: #selector(forgetPasswordTapped),
+            hapticFeedback: true
+        )
+        
+        setupInteractiveButton(
+            signupButton,
+            tapAction: #selector(signupTapped),
+            hapticFeedback: true
+        )
+
+        // زر التذكر
+        setupInteractiveButton(
+            rememberButton,
+            tapAction: #selector(rememberTapped),
+            hapticFeedback: true
+        )
+        
+        // أزرار وسائل التواصل الاجتماعي
+        setupInteractiveButton(
+            loginWithGoogleButton,
+            tapAction: #selector(loginWithGoogleTapped),
+            hapticFeedback: true
+        )
+
+        setupInteractiveButton(
+            loginWithAppleButton,
+            tapAction: #selector(loginWithAppleTapped),
+            hapticFeedback: true
+        )
+
 
     }
     
@@ -266,6 +316,8 @@ extension LoginVC {
             self.loginButton.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
             self.loginButton.alpha = 0.8
         }
+        
+        
     }
     
     @objc private func loginButtonTouchUp() {
@@ -277,13 +329,13 @@ extension LoginVC {
     }
 
     
-    @objc private func loginTappedloginTapped() {
+    @objc private func loginTapped() {
         
         print("🔐 تم الضغط على زر تسجيل الدخول")
         // التحقق من صحة البيانات أولاً
-       
-        // تأثير اهتزاز عند الضغط
-        HapticManager.shared.mediumImpact()
+        
+        // تأثير بصري للزر
+        loginButton.rippleAnimation()
         
         showLoginAlert()
 
@@ -291,75 +343,51 @@ extension LoginVC {
     }
     
     @objc private func forgetPasswordTapped() {
-        // الانتقال لشاشة استعادة كلمة المرور
-    //    goToVC(storyboard: .Auth, identifiers: .ForgotPassword)
-
-        // تأثير اهتزاز عند الضغط
-        HapticManager.shared.mediumImpact()
-        
-        // مؤقتاً: عرض رسالة
-        NativeMessagesManager.shared.showInfo(
-            title: "نسيت كلمة المرور",
-            message: "سيتم إضافة هذه الميزة قريباً"
-        )
-        
         print("🔄 نسيت كلمة المرور")
 
+        // أنيميشن انتقال سلس
+        forgetPasswordButton.scaleAnimation(from: 1.0, to: 0.95) {
+            // الانتقال لشاشة استعادة كلمة المرور
+            self.goToVC(storyboard: .Auth, identifiers: .ForgotPassword)
+        }
+  
     }
     
     @objc private func signupTapped() {
-
-        // الانتقال لشاشة التسجيل
-         goToVC(storyboard: .Auth, identifiers: .SignUp)
-        
-        // تأثير اهتزاز عند الضغط
-        HapticManager.shared.lightImpact()
-        
-        // مؤقتاً: عرض رسالة
-        NativeMessagesManager.shared.showInfo(
-            title: "إنشاء حساب جديد",
-            message: "سيتم إضافة هذه الميزة قريباً"
-        )
-        
         
         print("📝 إنشاء حساب جديد")
 
+        signupButton.bounceAnimation {
+            // الانتقال لشاشة التسجيل
+            self.goToVC(storyboard: .Auth, identifiers: .SignUp)
+
+        }
     }
     
     @objc private func rememberTapped() {
-        // تبديل حالة التذكر مع تأثير بصري
-        HapticManager.shared.lightImpact() // تأثير اهتزاز خفيف
-        isRememberSelected.toggle()
         print("💭 تذكرني: \(isRememberSelected ? "مفعل" : "غير مفعل")")
+        
+        // أنيميشن تبديل الحالة
+        rememberButton.buttonTapAnimation {
+            self.isRememberSelected.toggle()
+        }
 
     }
         
-    @objc private func termasTapped() {
-        // عرض الشروط والأحكام
-        // تأثير اهتزاز عند الضغط
-        HapticManager.shared.lightImpact()
-        
-        showTermsAndConditions()
-        print("📋 عرض الشروط والأحكام")
-
-    }
     
     @objc private func loginWithGoogleTapped() {
         // تسجيل دخول بـ Google
-        // تأثير اهتزاز عند الضغط
-        HapticManager.shared.lightImpact()
-        
-        handleSocialLogin(provider: "Google")
         print("🔵 تسجيل دخول بـ Google")
+        loginWithGoogleButton.pulseAnimation()
+        handleSocialLogin(provider: "Google")
+
     }
 
     @objc private func loginWithAppleTapped() {
-        // تسجيل دخول بـ Apple
-        // تأثير اهتزاز عند الضغط
-        HapticManager.shared.lightImpact()
-        
-        handleSocialLogin(provider: "Apple")
         print("⚫ تسجيل دخول بـ Apple")
+        // تأثير اهتزاز عند الضغط
+        loginWithAppleButton.pulseAnimation()
+        handleSocialLogin(provider: "Apple")
     }
 
     @objc private func textFieldDidChange() {
@@ -376,6 +404,12 @@ extension LoginVC {
 extension LoginVC {
     
     private func updateRememberSelection() {
+        
+//        selectImageView.animate(
+//            isRememberSelected ? .scale(from: 0.8, to: 1.1) : .fadeOut,
+//            config: AnimationConfig(duration: 0.3)
+//        )
+        
         UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.5) {
             self.selectImageView.isHidden = !self.isRememberSelected
             self.selectImageView.transform = self.isRememberSelected ?
@@ -393,13 +427,19 @@ extension LoginVC {
     }
     
     private func validateInputs() -> Bool {
+        mainView.forEach {
+            $0.layer.borderColor = UIColor.clear.cgColor
+            $0.layer.borderWidth = 0.0
+        }
         
         // التحقق من البريد الإلكتروني
         guard let email = emailTextField.text, !email.isEmpty else {
             NativeMessagesManager.shared.showFieldRequired(Alerts.email.texts)
             emailTextField.becomeFirstResponder()
-            emailTextField.layer.borderColor = UIColor.red.cgColor
-            emailTextField.layer.borderWidth = 1.0
+            if let emailView = mainView.first(where: {  $0.tag == 0 }) {
+                emailView.layer.borderColor = UIColor.red.cgColor
+                emailView.layer.borderWidth = 1.0
+            }
             return false
         }
         
@@ -415,8 +455,12 @@ extension LoginVC {
         guard let password = passwordTextField.text , !password.isEmpty else {
             NativeMessagesManager.shared.showFieldRequired(Alerts.password.texts)
             passwordTextField.becomeFirstResponder()
-            passwordTextField.layer.borderColor = UIColor.red.cgColor
-            passwordTextField.layer.borderWidth = 1.0
+            
+            if let passwordView = mainView.first(where: {  $0.tag == 1 }) {
+                passwordView.layer.borderColor = UIColor.red.cgColor
+                passwordView.layer.borderWidth = 1.0
+            }
+            
             return false
         }
         
@@ -428,9 +472,11 @@ extension LoginVC {
             NativeMessagesManager.shared.showValidationError(Alerts.invalidPassword.texts)
             HapticManager.shared.errorImpact()
             passwordTextField.becomeFirstResponder()
-            passwordTextField.layer.borderColor = UIColor.red.cgColor
-            passwordTextField.layer.borderWidth = 1.0
-
+            
+            if let passwordView = mainView.first(where: { $0.tag == 1 }) {
+                 passwordView.layer.borderColor = UIColor.red.cgColor
+                 passwordView.layer.borderWidth = 1.0
+             }
             return false
         }
         
@@ -515,32 +561,29 @@ extension LoginVC {
 
         
         // محاكاة عملية تسجيل الدخول
-        let loginDelay: Double = withValidData ? 2.0 : 1.0
+      //  let loginDelay: Double = withValidData ? 2.0 : 1.0
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + loginDelay) { [weak self] in
-            
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { [weak self] in
             NativeMessagesManager.shared.hide()
             
-            // محاكاة نجاح/فشل حسب صحة البيانات
-            if withValidData {
-             
-                // زيادة احتمالية النجاح للبيانات الصحيحة
-                let isSucces = Int.random(in: 1...10)  <= 8
-                
-                if isSucces {
-                    self?.handleLoginSuccess()
-                } else {
-                    self?.handleLoginFailure()
-                }
-            } else {
-                // للتجربة: نجاح دائماً
-                self?.handleDemoLogin()
-            }
+            // نجاح تسجيل الدخول
+            let email = self?.emailTextField.text ?? "demo@app.com"
+            let userName = email.components(separatedBy: "@").first ?? "مستخدم تجريبي"
+            
+            AppNavigationManager.shared.loginSuccess(
+                token: "temp_token_123",
+                userId: "user_\(Int.random(in: 1000...9999))",
+                userName: userName
+            )
+
+         
+
         }
 
     }
     
-    
+ 
+
     
     private func handleLoginSuccess() {
         // تأثير نجاح
@@ -637,24 +680,7 @@ extension LoginVC {
         NativeMessagesManager.shared.handleSocialLogin(provider: provider)        
     }
     
-    private func showTermsAndConditions() {
-        NativeMessagesManager.shared.showDialog(
-            title: "الشروط والأحكام",
-            message: "هل تريد قراءة الشروط والأحكام الخاصة بالتطبيق؟",
-            primaryButtonTitle: "قراءة",
-            secondaryButtonTitle: "إغلاق",
-            primaryAction: {
-                print("📖 فتح الشروط والأحكام")
-                HapticManager.shared.successImpact()
-                // الانتقال لشاشة الشروط والأحكام
-                // NavigationManager.shared.showTermsAndConditions()
-            },
-            secondaryAction: {
-                print("❌ إغلاق حوار الشروط والأحكام")
-                HapticManager.shared.lightImpact()
-            }
-        )
-    }
+
 
 }
 

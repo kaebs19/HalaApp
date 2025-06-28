@@ -16,7 +16,7 @@
 "welcomeSubtitleLabel"="قم بالتسجيل الدخول إلى الحساب الخاص بك من جديد.";
 "createAccountLabel"="قم بتعبية البيانات للتسجيل";
 "argeementLabel"="بالنقر فوق تسجيل فإنك توافق على الشروط والأحكام التالية دون تحفظ .";
-"iAgreeLabel"="انا موافق على";
+"iAgreeLabel"="بالنقر فوق تسجيل فإنك توافق على الشروط والأحكام التالية دون تحفظ";
 "forgotPasswordSubtitleLabel" = "يرجى إدخال بريدك الإلكتروني. سيصلك رابط لإنشاء كلمة مرور جديدة عبر البريد الإلكتروني.";
 
 "qrCodeSubtitleLabel" = "يمكن لمستخدمي تطبيق هلا شات مسح رمز الاستجابة السريعة هذا لإضافتك كصديق.";
@@ -29,6 +29,7 @@
 "dontHaveAccountLabel" = "ليس لديك حساب؟";
 "continuationButton" = "أستمرار";
 "orContinueWithLabel" = "------- او الاستمرار مع ------";
+"selectDateLabel" = "أختيار التاريخ";
 
 
 
@@ -50,7 +51,10 @@
 
 "EmailTFPlaceholder" = "البريد الاكتروني";
 "PasswordTFPlaceholder" = "كلمة المرور";
+"ConfirmPasswordTFPlaceholder" = "تاكيد كلمة المرور";
 "NameTFPlaceholder" = "الاسم";
+"UsernameTFPlaceholder" = "اسم المستخدم";
+"DateOfBirthTFPlaceholder" = "تاريخ الميلاد";
 
 
 
@@ -80,6 +84,18 @@
 "UpdateDescriptionBody" = "يتوفر إصدار جديد من التطبيق يحتوي على تحسينات وميزات جديدة";
 "DeleteConfirmationBody" = "هل أنت متأكد من رغبتك في حذف هذا العنصر؟ لا يمكن التراجع عن هذا الإجراء";
 "PleaseWaitBody" = "يرجى الانتظار...";
+
+"MinimumAgeBody" = "يرجى التحقق من تاريخ الميلاد";
+"MaximumAgeBody" = "يرجى التحقق من تاريخ الميلاد.";
+"AgeBody" = "العمر";
+"YearBody" = "السنة";
+"MonthBody" = "الشهر";
+"DayBody" = "اليوم";
+"AgeHasBeenSetBody" = "تم تحديد العمر ";
+"AgeIsInvalidBody" = "العمر غير صحيح";
+"DateOfBirthBody" = "تاريخ الميلاد";
+"UsernameAlert" = "اسم المستخدم غير صحيح";
+
 
 // Alerts
 "EmailAlert" = "البريد الأكتروني";
@@ -116,6 +132,9 @@
 "SkipAlert" = "تخطي";
 "ConnectingBody" = "الاتصال";
 "InvalidPasswordAlert" = "كلمة المرور غير صالحة";
+"DoneAlert" = "آنهاء";
+
+
 
 // العناوين
 "LoginTitle" = "تسجيل الدخول";

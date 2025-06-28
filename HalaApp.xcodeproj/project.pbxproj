@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		5C11631E2DF3A108006B6B26 /* MOLH in Frameworks */ = {isa = PBXBuildFile; productRef = 5C11631D2DF3A108006B6B26 /* MOLH */; };
 		5C14BA0F2DF7930500E64E89 /* SwiftMessages in Frameworks */ = {isa = PBXBuildFile; productRef = 5C14BA0E2DF7930500E64E89 /* SwiftMessages */; };
+		5CEF70F42E0CDDFF0037D280 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 5CEF70F32E0CDDFF0037D280 /* IQKeyboardManagerSwift */; };
+		5CEF70F92E0CE4CA0037D280 /* IQKeyboardToolbarManager in Frameworks */ = {isa = PBXBuildFile; productRef = 5CEF70F82E0CE4CA0037D280 /* IQKeyboardToolbarManager */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,7 +44,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				5C14BA0F2DF7930500E64E89 /* SwiftMessages in Frameworks */,
+				5CEF70F92E0CE4CA0037D280 /* IQKeyboardToolbarManager in Frameworks */,
 				5C11631E2DF3A108006B6B26 /* MOLH in Frameworks */,
+				5CEF70F42E0CDDFF0037D280 /* IQKeyboardManagerSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -87,6 +91,8 @@
 			packageProductDependencies = (
 				5C11631D2DF3A108006B6B26 /* MOLH */,
 				5C14BA0E2DF7930500E64E89 /* SwiftMessages */,
+				5CEF70F32E0CDDFF0037D280 /* IQKeyboardManagerSwift */,
+				5CEF70F82E0CE4CA0037D280 /* IQKeyboardToolbarManager */,
 			);
 			productName = HalaApp;
 			productReference = 5C1162932DF26233006B6B26 /* HalaApp.app */;
@@ -120,6 +126,8 @@
 			packageReferences = (
 				5C11631C2DF3A108006B6B26 /* XCRemoteSwiftPackageReference "MOLH" */,
 				5C14BA0D2DF7930500E64E89 /* XCRemoteSwiftPackageReference "SwiftMessages" */,
+				5CEF70F22E0CDDFF0037D280 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
+				5CEF70F72E0CE4CA0037D280 /* XCRemoteSwiftPackageReference "IQKeyboardToolbarManager" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 5C1162942DF26233006B6B26 /* Products */;
@@ -375,6 +383,22 @@
 				minimumVersion = 10.0.1;
 			};
 		};
+		5CEF70F22E0CDDFF0037D280 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.0.1;
+			};
+		};
+		5CEF70F72E0CE4CA0037D280 /* XCRemoteSwiftPackageReference "IQKeyboardToolbarManager" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardToolbarManager";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.1.3;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -387,6 +411,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 5C14BA0D2DF7930500E64E89 /* XCRemoteSwiftPackageReference "SwiftMessages" */;
 			productName = SwiftMessages;
+		};
+		5CEF70F32E0CDDFF0037D280 /* IQKeyboardManagerSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5CEF70F22E0CDDFF0037D280 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
+			productName = IQKeyboardManagerSwift;
+		};
+		5CEF70F82E0CE4CA0037D280 /* IQKeyboardToolbarManager */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5CEF70F72E0CE4CA0037D280 /* XCRemoteSwiftPackageReference "IQKeyboardToolbarManager" */;
+			productName = IQKeyboardToolbarManager;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

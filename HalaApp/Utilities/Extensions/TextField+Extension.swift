@@ -18,7 +18,10 @@ extension UITextField {
                               fontStyle: FontStyle = .semiBold,
                               ofSize: Sizes = .size_16 ,
                               padding: UIEdgeInsets =  UIEdgeInsets(top: 12, left: 16, bottom:12, right: 16 ),
-                              autoTemeUpdate: Bool = true){
+                              autoTemeUpdate: Bool = true,
+                              keyboardType: UIKeyboardType? = nil,
+                              returnKeyType:UIReturnKeyType? = nil
+                                ){
         
         // النص والخط
         self.textColor = textColor.color
@@ -34,14 +37,31 @@ extension UITextField {
                                                             ])
         }
         
+        // إعدادات الكيبورد (إذا تم تحديدها)
+        if let keyboardType = keyboardType {
+            self.keyboardType = keyboardType
+        }
+        
+        if let returnKeyType = returnKeyType {
+            self.returnKeyType = returnKeyType
+        }
+        
         // إعدادات المظهر العامة
         setupTextFieldAppearance()
         
         // تسجيل للتحديثات التلقائية للثيم
         if autoTemeUpdate {
-            
+            registerForThemeUpdates(
+                textColor: textColor,
+                placeholderColor: placeholderColor,
+                font: font,
+                fontStyle: fontStyle,
+                ofSize: ofSize
+            )
         }
+
     }
+    
     
     /// إعداد المسافات الداخلية
     private func setupTextFieldPadding(_ padding: UIEdgeInsets) {
@@ -281,6 +301,10 @@ extension UITextField {
     }
 }
 
+
+
+
+
 // MARK: - Supporting Classes
 private class PaddedTextField {
     class PaddingView: UIView {
@@ -306,5 +330,107 @@ private struct AssociatedKeys {
     static var font = "font"
     static var fontStyle = "fontStyle"
     static var fontSize = "fontSize"
+    static var emailCheckIcon = "emailCheckIcon"
+
 }
 
+
+extension UITextField {
+
+    /// تحديث مؤشر صحة البريد الإلكتروني
+    func updateEmailValidationIndicator(isValid: Bool) {
+        guard let checkIcon = objc_getAssociatedObject(self, &AssociatedKeys.emailCheckIcon) as? UIImageView else { return }
+        
+        UIView.animate(withDuration: 0.3) {
+            checkIcon.isHidden = !isValid
+            checkIcon.transform = isValid ?
+                CGAffineTransform(scaleX: 1.2, y: 1.2) : .identity
+        } completion: { _ in
+            if isValid {
+                UIView.animate(withDuration: 0.2) {
+                    checkIcon.transform = .identity
+                }
+            }
+        }
+    }
+    
+    // MARK: - Validation Border
+    
+    
+    /// إعداد حقل السنة مع لوحة مفاتيح رقمية
+    func setupAsYearField(
+        placeholder: Placeholders,
+        textColor: AppColors = .text,
+        placeholderColor: AppColors = .placeholder,
+        font: Fonts = .cairo,
+        ofSize: Sizes = .size_16
+    ) {
+        // الإعداد الأساسي
+        self.textColor = textColor.color
+        self.font = FontManager.shared.fontApp(family: font, style: .medium, size: ofSize)
+        
+        // Placeholder
+        self.attributedPlaceholder = NSAttributedString(
+            string: placeholder.PlaceholderText,
+            attributes: [
+                .foregroundColor: placeholderColor.color,
+                .font: FontManager.shared.fontApp(family: font, style: .regular, size: ofSize)
+            ]
+        )
+        
+        // إعدادات لوحة المفاتيح
+        self.keyboardType = .numberPad
+        self.textContentType = .none
+        
+        // منع النسخ واللصق للنصوص غير الرقمية
+        self.autocorrectionType = .no
+        self.spellCheckingType = .no
+        
+        // تحديد الحد الأقصى لعدد الأحرف
+        self.addTarget(self, action: #selector(limitYearInput), for: .editingChanged)
+        
+        // إعدادات المظهر
+        self.backgroundColor = .clear
+        self.layer.borderWidth = 0
+        self.textAlignment = Directions.auto.textAlignment
+    }
+    
+    @objc private func limitYearInput() {
+        // تحديد الحد الأقصى بـ 4 أرقام
+        if let text = self.text, text.count > 4 {
+            self.text = String(text.prefix(4))
+        }
+    }
+
+
+}
+
+
+// MARK: - أمثلة الاستخدام
+/*
+ 
+ // استخدام عادي بدون تحديد نوع الكيبورد
+ emailField.setupCustomTextField(
+     placeholder: .email
+ )
+ 
+ // استخدام مع تحديد نوع الكيبورد فقط
+ emailField.setupCustomTextField(
+     placeholder: .email,
+     keyboardType: .emailAddress
+ )
+ 
+ // استخدام مع تحديد زر Return فقط
+ passwordField.setupCustomTextField(
+     placeholder: .password,
+     returnKeyType: .done
+ )
+ 
+ // استخدام مع تحديد الاثنين
+ phoneField.setupCustomTextField(
+     placeholder: .phone,
+     keyboardType: .phonePad,
+     returnKeyType: .done
+ )
+ 
+ */
