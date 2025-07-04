@@ -137,7 +137,7 @@ extension NativeMessagesManager {
         let messageLabel = UILabel()
         messageLabel.text = message
         messageLabel.font = FontManager.shared.fontApp(family: .cairo, style: .medium, size: .size_15)
-        messageLabel.textColor = AppColors.textSecondary.color
+        messageLabel.textColor = AppColors.text.color
         messageLabel.numberOfLines = 0
         messageLabel.textAlignment = .center
         

@@ -8,9 +8,12 @@
 import UIKit
 
 // MARK: - Image Configuration
+import UIKit
+
+// MARK: - Image Configuration
 
 struct ImageConfiguration {
-    let imageName: Images
+    let imageName: AppImage
     let size: CGSize?
     let tintColor: AppColors?
     let isCircular: Bool
@@ -19,7 +22,7 @@ struct ImageConfiguration {
     
     // MARK: - Initializers
     init(
-        _ imageName: Images,
+        _ imageName: AppImage,
         size: CGSize? = nil,
         tintColor: AppColors? = nil,
         isCircular: Bool = false,
@@ -60,12 +63,11 @@ struct ImageConfiguration {
     }
 }
 
-
 // MARK: - Predefined Configurations
 extension ImageConfiguration {
     
     // MARK: - Navigation Icons
-    static func navigationIcon(_ imageName: Images, size: CGFloat = 24) -> ImageConfiguration {
+    static func navigationIcon(_ imageName: AppImage, size: CGFloat = 24) -> ImageConfiguration {
         return ImageConfiguration(
             imageName,
             size: CGSize(width: size, height: size),
@@ -85,17 +87,8 @@ extension ImageConfiguration {
         return navigationIcon(.close, size: size)
     }
     
-    // MARK: - Tab Bar Icons
-    static func tabBarIcon(_ imageName: Images) -> ImageConfiguration {
-        return ImageConfiguration(
-            imageName,
-            size: CGSize(width: 28, height: 28),
-            tintColor: .primary
-        )
-    }
-    
     // MARK: - Profile Images
-    static func profileImage(_ imageName: Images, diameter: CGFloat = 60) -> ImageConfiguration {
+    static func profileImage(_ imageName: AppImage, diameter: CGFloat = 60) -> ImageConfiguration {
         return ImageConfiguration(
             imageName,
             isCircular: true,
@@ -116,7 +109,7 @@ extension ImageConfiguration {
     }
     
     // MARK: - Social Media Icons
-    static func socialIcon(_ imageName: Images, size: CGFloat = 32) -> ImageConfiguration {
+    static func socialIcon(_ imageName: AppImage, size: CGFloat = 32) -> ImageConfiguration {
         return ImageConfiguration(
             imageName,
             size: CGSize(width: size, height: size)
@@ -130,5 +123,4 @@ extension ImageConfiguration {
     static func appleIcon(size: CGFloat = 32) -> ImageConfiguration {
         return socialIcon(.apple, size: size)
     }
-
 }

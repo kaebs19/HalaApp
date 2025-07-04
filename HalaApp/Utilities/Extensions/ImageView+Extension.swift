@@ -9,22 +9,22 @@ import UIKit
 
 extension UIImageView {
     /// تعيين صورة مع دعم الثيم
-    func setImage(_ imageName: Images, for theme: ThemeManager.ThemeMode? = nil) {
+    func setImage(_ imageName: AppImage, for theme: ThemeManager.ThemeMode? = nil) {
         self.image = ImageManager.image(imageName, for: theme)
     }
     
     /// تعيين صورة مع لون
-    func setImage(_ imageName: Images, tintColor: AppColors) {
+    func setImage(_ imageName: AppImage, tintColor: AppColors) {
         self.image = ImageManager.image(imageName, tintColor: tintColor)
     }
     
     /// تعيين صورة بحجم محدد
-    func setImage(_ imageName: Images, size: CGSize) {
+    func setImage(_ imageName: AppImage, size: CGSize) {
         self.image = ImageManager.image(imageName, size: size)
     }
     
     /// تعيين صورة دائرية
-    func setCircularImage(_ imageName: Images, diameter: CGFloat) {
+    func setCircularImage(_ imageName: AppImage, diameter: CGFloat) {
         self.image = ImageManager.circularImage(imageName, diameter: diameter)
     }
 
@@ -39,12 +39,12 @@ extension UIImageView {
     }
     
     /// تعيين أيقونة التنقل
-    func setNavigationIcon(_ imageName: Images, size: CGFloat = 24) {
+    func setNavigationIcon(_ imageName: AppImage, size: CGFloat = 24) {
         setImage(configuration: .navigationIcon(imageName, size: size))
     }
     
     /// تعيين صورة ملف شخصي
-    func setProfileImage(_ imageName: Images, diameter: CGFloat = 60) {
+    func setProfileImage(_ imageName: AppImage, diameter: CGFloat = 60) {
         setImage(configuration: .profileImage(imageName, diameter: diameter))
     }
     

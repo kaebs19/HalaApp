@@ -53,12 +53,48 @@ extension AppNavigationManager {
     }
     
     /// إنشاء الواجهة الرئيسية
+    /// إنشاء الواجهة الرئيسية عبر الكود
+
     internal func createMainViewController() -> UIViewController {
-        guard let mainVC = loadFromStoryboard(.Main, identifier: .Main) else {
-            fatalError("❌ لا يمكن تحميل الواجهة الرئيسية من Storyboard")
-        }
-        return wrapInNavigationController(mainVC)
+        // إنشاء TabBar Controller
+        // إنشاء TabBar Controller برمجياً (ليس من Storyboard)
+            let tabBarController = MainTabBars()
+            
+            // إنشاء ViewControllers من Storyboards المنفصلة
+            let homeVC = createViewController(from: .Main, identifier: .Home)
+            let messagesVC = createViewController(from: .Main, identifier: .Messages)
+            let notificationsVC = createViewController(from: .Main, identifier: .Notifications)
+            let accountVC = createViewController(from: .Main, identifier: .Acounts)
+            
+            // لف كل ViewController في NavigationController
+            let homeNav = createNavigationController(rootViewController: homeVC)
+            let messagesNav = createNavigationController(rootViewController: messagesVC)
+            let notificationsNav = createNavigationController(rootViewController: notificationsVC)
+            let accountNav = createNavigationController(rootViewController: accountVC)
+            
+            // تعيين ViewControllers للـ TabBar
+            tabBarController.viewControllers = [homeNav, messagesNav, notificationsNav, accountNav]
+            
+            print("✅ تم إنشاء MainViewController مع \(tabBarController.viewControllers?.count ?? 0) ViewControllers")
+            
+            return tabBarController
+
     }
+    
+    /// إنشاء ViewController من Storyboard
+      private func createViewController(from storyboard: Storyboards, identifier: Identifiers) -> UIViewController {
+          let storyboardInstance = UIStoryboard(name: storyboard.rawValue, bundle: nil)
+          let viewController = storyboardInstance.instantiateViewController(withIdentifier: identifier.rawValue)
+          return viewController
+      }
+      
+      /// إنشاء NavigationController
+      private func createNavigationController(rootViewController: UIViewController) -> UINavigationController {
+          let navController = UINavigationController(rootViewController: rootViewController)
+          // إزالة أي TabBarItem موجود
+          navController.tabBarItem = nil
+          return navController
+      }
     
     // MARK: - Helper Methods
     

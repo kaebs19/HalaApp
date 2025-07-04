@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-enum Images: String {
+enum AppImage: String {
     
     case apple = "apple"
     case back = "back"
@@ -28,6 +28,17 @@ enum Images: String {
     case share = "share"
     case version = "version"
     case logout = "logout"
+    
+    // TabBars
+        case homeSelected = "home_Select"
+       case homeUnselected = "home_UnSelect"
+       case messageSelected = "message_Select"
+       case messageUnselected = "message_UnSelect"
+       case notificationSelected = "notifications_Select"
+       case notificationUnselected = "notifications_UnSelect"
+       case accountSelected = "account_Select"
+       case accountUnselected = "account_UnSelect"
+
     
     
     var imageName: String {

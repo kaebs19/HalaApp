@@ -30,13 +30,13 @@ enum NavigationButtonType: Equatable, Hashable {
         case .back:
             return LanguageManager.shared.isEnglish() ? "chevron.left" : "chevron.right"
         case .close:
-            return Images.close.imageName
+            return AppImage.close.imageName
         case .custom(let icon, _):
             return icon
         case .menu:
-            return Images.menu.imageName
+            return AppImage.menu.imageName
         case .more:
-            return Images.morefill.imageName
+            return AppImage.morefill.imageName
         case .done:
             return "checkmark"
         case .cancel:
@@ -44,11 +44,11 @@ enum NavigationButtonType: Equatable, Hashable {
         case .next:
             return LanguageManager.shared.isEnglish() ? "chevron.right" : "chevron.left"
         case .save:
-            return Images.save.imageName
+            return AppImage.save.imageName
         case .notificaiton:
-            return Images.notification.imageName
+            return AppImage.notification.imageName
         case .search:
-            return Images.search.imageName
+            return AppImage.search.imageName
         case .info:
             return "info.circle"
         case .help:

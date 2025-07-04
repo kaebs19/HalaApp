@@ -13,9 +13,16 @@ enum Identifiers: String {
     case Login = "LoginVC"
     case SignUp = "SignUpVC"
     case ForgotPassword = "ForgotPasswordVC"
-    case Main = "MainVC"
+   // case Main = "MainTabBars"
     
     case Settings = "SettingsVC"
     case Profile = "ProfileVC"
     case Home = "HomeVC"
+    case Messages = "MessagesVC"
+    case Notifications = "NotificationVC"
+    case Acounts = "AccountVC"
+    
+    var identifierName: String {
+        return self.rawValue
+    }
 }

@@ -18,6 +18,7 @@ enum AppColors: String, CaseIterable {
     case textSecondary = "TextSecondary"
     case secondBackground = "SecondBackground"
     case placeholder = "Placeholder"
+    case separator = "Separator"
     
     // الوان اظافية
     case success = "Success"
@@ -67,7 +68,7 @@ enum AppColors: String, CaseIterable {
         case .secondary:
             return UIColor.secondaryLabel
         case .accent:
-            return UIColor.systemOrange
+            return UIColor.systemBlue
         case .success:
             return UIColor.systemGreen
         case .warning:
@@ -88,6 +89,8 @@ enum AppColors: String, CaseIterable {
                 return UIColor.systemGray6
             case .boarderColor:
                 return UIColor.systemOrange
+            case .separator:
+                return UIColor.systemGray2
         }
     }
 }

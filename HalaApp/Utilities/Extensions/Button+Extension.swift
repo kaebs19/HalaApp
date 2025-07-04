@@ -78,13 +78,13 @@ extension UIButton {
     }
 
     /// تعيين صورة للزر مع دعم الثيم
-    func setImage(_ imageName: Images, for state: UIControl.State = .normal, theme: ThemeManager.ThemeMode? = nil) {
+    func setImage(_ imageName: AppImage, for state: UIControl.State = .normal, theme: ThemeManager.ThemeMode? = nil) {
         let image = ImageManager.image(imageName, for: theme)
         self.setImage(image, for: state)
     }
     
     /// تعيين صورة مع لون للزر
-    func setImage(_ imageName: Images, tintColor: AppColors, for state: UIControl.State = .normal) {
+    func setImage(_ imageName: AppImage, tintColor: AppColors, for state: UIControl.State = .normal) {
         let image = ImageManager.image(imageName, tintColor: tintColor)
         self.setImage(image, for: state)
     }
@@ -96,7 +96,7 @@ extension UIButton {
        }
        
        /// تعيين أيقونة التنقل للزر
-       func setNavigationIcon(_ imageName: Images, size: CGFloat = 24, for state: UIControl.State = .normal) {
+       func setNavigationIcon(_ imageName: AppImage, size: CGFloat = 24, for state: UIControl.State = .normal) {
            setImage(configuration: .navigationIcon(imageName, size: size), for: state)
        }
     

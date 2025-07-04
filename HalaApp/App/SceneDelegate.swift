@@ -26,22 +26,23 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // إعداد جميع أنظمة التطبيق عند البدء
         setupAppSystems()
         
-        // إنشاء النافذة
-        window = UIWindow(windowScene: windowScene)
-        window?.backgroundColor = AppColors.background.color
-        window?.tintColor = AppColors.primary.color
-        
-        // إعداد الثيم
-        ThemeManager.shared.applyStoredTheme()
-        ThemeManager.shared.startSystemThemeObserver()
-        
-        setupThemeSystem()
-        
-        // تحديد وعرض الواجهة المناسبة
-        setupInitialViewController()
-        
-        // عرض النافذة
-        window?.makeKeyAndVisible()
+        // 1. إنشاء النافذة
+           window = UIWindow(windowScene: windowScene)
+           window?.backgroundColor = AppColors.background.color
+           window?.tintColor = AppColors.primary.color
+           
+           // 2. تمرير النافذة
+           AppNavigationManager.shared.setCurrentWindow(window)
+           
+           // 3. إعداد الثيم
+           ThemeManager.shared.applyStoredTheme()
+           ThemeManager.shared.startSystemThemeObserver()
+           
+           // 4. إعداد الواجهة الأولى
+           AppNavigationManager.shared.setupInitialViewController()
+           
+           // 5. عرض النافذة
+           window?.makeKeyAndVisible()
         
         print("🚀 تم إطلاق التطبيق بنجاح")
 
@@ -112,8 +113,6 @@ extension SceneDelegate {
         // 1️⃣ إعداد نظام الثيمز أولاً
         setupThemeSystem()
         
-        // 2️⃣ إعداد نظام التنقل
-        setupNavigationSystem()
         
         // 3️⃣ إعدادات إضافية
         setupAdditionalSystems()
@@ -132,14 +131,7 @@ extension SceneDelegate {
             
         
     }
-    
-    /// إعداد نظام التنقل
-    private func setupNavigationSystem() {
-        
-        // تحديد وإعداد الواجهة الأولى المناسبة
-        AppNavigationManager.shared.setupInitialViewController()
-      //  print("🚀 تم إعداد نظام التنقل")
-    }
+
     
     /// إعدادات إضافية أخرى
     func setupAdditionalSystems() {
@@ -185,78 +177,6 @@ extension SceneDelegate {
     }
 
 }
-
-
-// MARK: - Setup Methods
-extension SceneDelegate {
-    
-    /// تحديد وعرض الواجهة المناسبة
-    private func setupInitialViewController() {
-        
-        let hasCompletedOnboarding = UserDefaultsManager.hasCompletedOnboarding
-        let isLoggedIn = UserDefaultsManager.isLoggedIn
-        
-        print("📊 حالة التطبيق:")
-        print("   - مكمل التعريف: \(hasCompletedOnboarding ? "✅" : "❌")")
-        print("   - مسجل دخول: \(isLoggedIn ? "✅" : "❌")")
-        
-        // تحديد الواجهة المناسبة
-        let initialViewController: UIViewController?
-        
-        if !hasCompletedOnboarding {
-            print("🎯 عرض واجهة التعريف")
-            initialViewController = loadOnboardingViewController()
-        } else if !isLoggedIn {
-            print("🔐 عرض واجهة تسجيل الدخول")
-            initialViewController = loadLoginViewController()
-        } else {
-            print("🏠 عرض التطبيق الرئيسي")
-            initialViewController = loadMainViewController()
-        }
-        
-        // تعيين الواجهة
-        if let viewController = initialViewController {
-            window?.rootViewController = viewController
-            print("✅ تم تعيين الواجهة بنجاح")
-        } else {
-            print("❌ فشل في تحميل الواجهة")
-        }
-    }
-    
-    /// تحميل واجهة التعريف
-    private func loadOnboardingViewController() -> UIViewController? {
-        guard let onboardingVC = Storyboards.Onboarding.instantiateViewController(withIdentifier: .Onboarding) else {
-            print("❌ فشل في تحميل OnboardingVC من Storyboard")
-            return nil
-        }
-        
-        print("✅ تم تحميل OnboardingVC من Storyboard")
-        return UINavigationController(rootViewController: onboardingVC)
-    }
-    
-    /// تحميل واجهة تسجيل الدخول
-    private func loadLoginViewController() -> UIViewController? {
-        guard let loginVC = Storyboards.Auth.instantiateViewController(withIdentifier: .Login) else {
-            print("❌ فشل في تحميل LoginVC من Storyboard")
-            return nil
-        }
-        
-        print("✅ تم تحميل LoginVC من Storyboard")
-        return UINavigationController(rootViewController: loginVC)
-    }
-    
-    /// تحميل الواجهة الرئيسية
-    private func loadMainViewController() -> UIViewController? {
-        guard let mainVC = Storyboards.Main.instantiateViewController(withIdentifier: .Main) else {
-            print("❌ فشل في تحميل MainVC من Storyboard")
-            return nil
-        }
-        
-        print("✅ تم تحميل MainVC من Storyboard")
-        return UINavigationController(rootViewController: mainVC)
-    }
-}
-
 
 extension SceneDelegate {
     

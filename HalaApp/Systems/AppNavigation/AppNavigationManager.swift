@@ -13,17 +13,15 @@ final class AppNavigationManager {
     // MARK: - Singleton
     static let shared = AppNavigationManager()
     private init() {}
+    private weak var window: UIWindow?
+
     
     // MARK: - Properties
-    internal var currentWindow: UIWindow? {
-        if #available(iOS 13.0, *) {
-            return UIApplication.shared.connectedScenes
-                .compactMap { $0 as? UIWindowScene }
-                .first?.windows.first
-        } else {
-            return UIApplication.shared.windows.first
-        }
+    
+    var currentWindow: UIWindow? {
+        return window
     }
+
     
     // MARK: - Main Setup
     /// إعداد الواجهة الأولى للتطبيق
@@ -39,6 +37,10 @@ final class AppNavigationManager {
         window.makeKeyAndVisible()
         
         print("✅ تم عرض الواجهة: \(String(describing: type(of: targetViewController)))")
+    }
+    
+    func setCurrentWindow(_ window: UIWindow?) {
+        self.window = window
     }
 }
 

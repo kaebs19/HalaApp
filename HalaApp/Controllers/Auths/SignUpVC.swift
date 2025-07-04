@@ -50,18 +50,13 @@ class SignUpVC: UIViewController {
         //دالة تنظيف
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        removeThemeObserver()
-        // تنظيف الرسائل المعلقة - مهم جداً!
-
-        NativeMessagesManager.shared.hideAll()
+            cleanup()
     }
 
     
     deinit {
-        removeThemeObserver()
+        cleanup()
         
-        // تنظيف الرسائل المعلقة - مهم جداً!
-        NativeMessagesManager.shared.hideAll()
     }
     
 }
@@ -78,7 +73,7 @@ extension SignUpVC {
         setupViews()
         setupImages()
         setupButtons()
-        setupLabels()
+        setupLables()
         setupTextFields()
     }
     
@@ -94,7 +89,7 @@ extension SignUpVC {
 
     }
     
-    private func setupLabels() {
+    private func setupLables() {
         
         // إعداد التسميات
         createAccountLabel.setupCustomLable(text: Lables.createAccount.textName,
@@ -194,10 +189,7 @@ extension SignUpVC {
            responsive: true
        )
        
-       // إضافة الأهداف
        addButtonTargets()
-       // إعداد الزر التفاعلي
-       setupInteractiveSignupButton()
        
     }
     
@@ -213,25 +205,12 @@ extension SignUpVC {
     
     private func addButtonTargets() {
         // إضافة أهداف للأزرار
-        signupButton.addTarget(self, action: #selector(signupTapped), for: .touchUpInside)
-        termsAndConditionsButton.addTarget(self, action: #selector(termasTapped), for: .touchUpInside)
+        setupInteractiveButton(signupButton, tapAction: #selector(signupTapped), hapticFeedback: true)
+        setupInteractiveButton(termsAndConditionsButton, tapAction: #selector(termasTapped), hapticFeedback: true)
 
     }
 
-    
-    private func setupInteractiveSignupButton() {
-        // الزر مفعل دائماً
-        signupButton.isEnabled = true
-        signupButton.alpha = 1
-        
-        // إضافة تأثيرات التفاعل
-        signupButton.addTarget(self, action: #selector(signupButtonTouchDown), for: .touchDown)
-        signupButton.addTarget(self, action: #selector(signupButtonTouchUp), for: [.touchUpInside , .touchUpOutside , .touchCancel])
-        
-        // تحديث مظهر الزر
-        updateButtonVisualState()
 
-    }
     
     private func updateButtonVisualState() {
         
@@ -242,6 +221,7 @@ extension SignUpVC {
     
     
     private func showTermsAndConditions() {
+      
         NativeMessagesManager.shared.showDialog(
             title: "الشروط والأحكام",
             message: "هل تريد قراءة الشروط والأحكام الخاصة بالتطبيق؟",
@@ -250,8 +230,6 @@ extension SignUpVC {
             primaryAction: {
                 print("📖 فتح الشروط والأحكام")
                 HapticManager.shared.successImpact()
-                // الانتقال لشاشة الشروط والأحكام
-                // NavigationManager.shared.showTermsAndConditions()
             },
             secondaryAction: {
                 print("❌ إغلاق حوار الشروط والأحكام")
@@ -262,52 +240,37 @@ extension SignUpVC {
 
 }
 
+
 // MARK: - Actions
 extension SignUpVC {
     
-    @objc private func signupButtonTouchDown() {
-        HapticManager.shared.lightImpact()
-        UIView.animate(withDuration: 0.1) {
-            self.signupButton.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
-            self.signupButton.alpha = 0.8
-        }
 
-    }
     
-    @objc private func signupButtonTouchUp() {
-        // إعادة الحجم الطبيعي
-        UIView.animate(withDuration: 0.1) {
-            self.signupButton.transform = .identity
-            self.signupButton.alpha = 1.0
-        }
-    }
     
     @objc private func signupTapped() {
         print("📝 تم الضغط على زر إنشاء حساب")
         
-        // تأثير اهتزاز عند الضغط
-        HapticManager.shared.mediumImpact()
+        // ✅ إضافة تأثير بصري
+        signupButton.rippleAnimation()
         
         showSignupValidation()
     }
     
     @objc private func termasTapped() {
         // عرض الشروط والأحكام
-        // تأثير اهتزاز عند الضغط
-        HapticManager.shared.lightImpact()
+        termsAndConditionsButton.pulseAnimation()
         
+        // ✅ إضافة أنيميشن
         showTermsAndConditions()
         print("📋 عرض الشروط والأحكام")
 
     }
 
     @objc private func textFieldDidChange() {
-       
+        // يمكن إضافة منطق تحديث UI هنا لاحقاً
+
     }
     
-
-    
-  
     @objc private func yearFieldDidChange() {
         guard let text = dateOfBirthTextField.text else { return }
         
@@ -332,57 +295,52 @@ extension SignUpVC {
 extension SignUpVC {
     
     private func showSignupValidation() {
-        let userName = userNameTextField.text?.trimmed ?? ""
-        let email = emailTextField.text?.trimmed ?? ""
-        let password = passwordTextField.text?.trimmed ?? ""
-        let confirmPassword = confirmPasswordTextField.text?.trimmed ?? ""
+
+        let validations = [
+            (view: mainView[0], isValid: !(userNameTextField.text?.trimmed.isEmpty ?? true)),
+            (view: mainView[1], isValid: emailTextField.text?.isValidEmail ?? false),
+            (view: mainView[2], isValid: (passwordTextField.text?.count ?? 0) >= 6),
+            (view: mainView[3], isValid: passwordTextField.text == confirmPasswordTextField.text),
+            (view: mainView[4], isValid: isValidBirthYear(dateOfBirthTextField.text?.trimmed ?? ""))
+        ]
         
-
-        let yearText = dateOfBirthTextField.text?.trimmed ?? ""
-
-
-        // التحقق البسيط
-        if userName.isEmpty {
-            NativeMessagesManager.shared.showValidationError(Alerts.username.texts)
-            return
+        let isValid = validateFields(validations, showSuccess: false)
+        
+        if isValid {
+            // ✅ إضافة أنيميشن نجاح
+            showSuccessAnimation(view: signupButton, message: "تم التحقق بنجاح") {
+                // منطق التسجيل
+                self.performSignup()
+            }
         }
         
-        if email.isEmpty {
-            NativeMessagesManager.shared.showValidationError(Alerts.EmailIsEmpty.texts)
-
-            return
-        }
+    }
+    
+    private func performSignup() {
+        showLoadingState(
+            button: signupButton,
+            originalTitle: "إنشاء حساب",
+            loadingTitle: "جاري الإنشاء..."
+        )
         
-        if !email.isValidEmail {
-            NativeMessagesManager.shared.showValidationError(Alerts.invalidMail.texts)
-            return
-        }
+        NativeMessagesManager.shared.showLoading(
+            title: "إنشاء الحساب",
+            message: "يرجى الانتظار..."
+        )
         
-        if password.isEmpty {
-            NativeMessagesManager.shared.showValidationError(Alerts.invalidPassword.texts)
-
-            return
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { [weak self] in
+            guard let self = self else { return }
+            
+            NativeMessagesManager.shared.hide()
+            self.hideLoadingState(button: self.signupButton)
+            
+            let userName = self.userNameTextField.text ?? "مستخدم جديد"
+            
+            self.showSuccessAnimation(view: self.signupButton, message: "تم إنشاء الحساب بنجاح") {
+                // يمكن إضافة منطق التسجيل الناجح هنا
+                self.navigationController?.popViewController(animated: true)
+            }
         }
-        
-        if password.count < 6 {
-            NativeMessagesManager.shared.showValidationError(Alerts.PasswordIsShort.texts)
-
-            return
-        }
-        
-        if password != confirmPassword {
-            NativeMessagesManager.shared.showValidationError(Alerts.PasswordDoesNotMatch.texts)
-
-            return
-        }
-        
-        if !isValidBirthYear(yearText) {
-
-            return
-        }
-        
-        // إذا نجح التحقق - عرض نجاح مؤقت
-        NativeMessagesManager.shared.showSuccess(titleType: .success)
 
     }
     
@@ -430,13 +388,11 @@ extension SignUpVC {
     private func isValidBirthYear(_ yearText: String) -> Bool {
         // التحقق من وجود نص
         if yearText.isEmpty {
-            NativeMessagesManager.shared.showValidationError("سنة الميلاد مطلوبة")
             return false
         }
         
         // التحقق من أن النص يحتوي على 4 أرقام
         guard yearText.count == 4, let year = Int(yearText) else {
-            NativeMessagesManager.shared.showValidationError("يرجى إدخال سنة صحيحة (4 أرقام)")
             return false
         }
         
@@ -458,7 +414,6 @@ extension SignUpVC {
         return true
     }
 
-
     
     /// رسالة خطأ بسيطة
     private func showValidationMessage(_ message: String) {
@@ -475,4 +430,40 @@ extension SignUpVC {
         // هنا سيتم إضافة منطق التسجيل لاحقاً
     }
 
+    private func cleanup() {
+        removeThemeObserver()
+        NativeMessagesManager.shared.hideAll()
+        view.subviews.forEach { $0.layer.removeAllAnimations() }
+
+    }
 }
+
+
+// MARK: - Theme Support
+extension SignUpVC {
+    
+    override func updateUIForCurrentTheme() {
+        
+        view.setBackgroundColor(.background)
+        // تحديث ألوان العناصر حسب النمط
+        createAccountLabel.textColor = AppColors.text.color
+        
+        // تحديث ألوان العروض
+        mainView.forEach { view in
+            view.backgroundColor = AppColors.secondBackground.color
+        }
+        
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
+        if traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
+            DispatchQueue.main.async {
+                self.updateUIForCurrentTheme()
+            }
+        }
+    }
+}
+    
+

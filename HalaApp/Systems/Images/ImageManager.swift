@@ -17,8 +17,8 @@ class ImageManager {
     
     /// الحصول على صورة بناءً على الثيم الحالي
     
-      /// الحصول على صورة بناءً على الثيم الحالي
-    static func image(_ imageName: Images, for theme: ThemeManager.ThemeMode? = nil) -> UIImage? {
+    /// الحصول على صورة بناءً على الثيم الحالي
+    static func image(_ imageName: AppImage, for theme: ThemeManager.ThemeMode? = nil) -> UIImage? {
         let currentTheme = theme ?? ThemeManager.shared.currentTheme
         let isDark = shouldUseDarkImage(fot: currentTheme)
         
@@ -26,7 +26,7 @@ class ImageManager {
     }
     
     /// الحصول على صورة مع لون مخصص
-    static func image(_ imageName: Images, tintColor: AppColors) -> UIImage? {
+    static func image(_ imageName: AppImage, tintColor: AppColors) -> UIImage? {
         guard let image = UIImage(named: imageName.imageName) else {
             print("⚠️ الصورة غير موجودة: \(imageName.imageName)")
             return nil
@@ -35,7 +35,7 @@ class ImageManager {
     }
     
     /// الحصول على صورة بحجم محدد
-    static func image(_ imageName: Images, size: CGSize) -> UIImage? {
+    static func image(_ imageName: AppImage, size: CGSize) -> UIImage? {
         guard let image = UIImage(named: imageName.imageName) else {
             print("⚠️ الصورة غير موجودة: \(imageName.imageName)")
             return nil
@@ -44,7 +44,7 @@ class ImageManager {
     }
     
     /// الحصول على صورة دائرية
-    static func circularImage(_ imageName: Images, diameter: CGFloat) -> UIImage? {
+    static func circularImage(_ imageName: AppImage, diameter: CGFloat) -> UIImage? {
         guard let image = UIImage(named: imageName.imageName) else {
             print("⚠️ الصورة غير موجودة: \(imageName.imageName)")
             return nil
@@ -52,6 +52,14 @@ class ImageManager {
         return image.circularImage(with: diameter)
     }
     
+
+       /// إنشاء أيقونة بديلة في حالة عدم وجود الأيقونة
+       private static func createPlaceholderIcon() -> UIImage? {
+           // إنشاء أيقونة بسيطة باستخدام SF Symbols
+           let config = UIImage.SymbolConfiguration(pointSize: 24, weight: .medium)
+           return UIImage(systemName: "circle", withConfiguration: config)
+       }
+
   
 
     // MARK: - Helper Methods
@@ -67,7 +75,7 @@ class ImageManager {
     }
     
     /// الحصول على الصورة الفعلية
-    private static func getImage(_ imageName: Images, isDark: Bool) -> UIImage? {
+    private static func getImage(_ imageName: AppImage, isDark: Bool) -> UIImage? {
         // محاولة الحصول على نسخة الثيم أولاً
         let themeImageName = isDark ? "\(imageName.imageName)_dark" : "\(imageName.imageName)_light"
         

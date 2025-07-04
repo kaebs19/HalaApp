@@ -7,16 +7,12 @@
 
 import UIKit
 
-// MARK: - Error Handling & Validation (معالجة الأخطاء والتحقق)
+// MARK: - Error Handling & Validation
 extension AppNavigationManager {
     
     // MARK: - Validation Methods
-    /// تحميل ViewController من Storyboard
-    private func loadFromStoryboard(_ storyboard: Storyboards, identifier: Identifiers) -> UIViewController? {
-        return storyboard.instantiateViewController(withIdentifier: identifier)
-    }
-
-    /// التحقق من صحة Storyboard والمعرفات
+    
+    /// التحقق من صحة Storyboards والمعرفات
     internal func validateStoryboards() -> Bool {
         var isValid = true
         
@@ -32,10 +28,19 @@ extension AppNavigationManager {
             isValid = false
         }
         
-        // التحقق من الواجهة الرئيسية
-        if loadFromStoryboard(.Main, identifier: .Main) == nil {
-            print("❌ خطأ: لا يمكن تحميل الواجهة الرئيسية")
-            isValid = false
+        // التحقق من ViewControllers الرئيسية
+        let mainViewControllers = [
+            ("Home", Identifiers.Home),
+            ("Messages", Identifiers.Messages),
+            ("Notifications", Identifiers.Notifications),
+            ("Account", Identifiers.Acounts)
+        ]
+        
+        for (name, identifier) in mainViewControllers {
+            if loadFromStoryboard(.Main, identifier: identifier) == nil {
+                print("❌ خطأ: لا يمكن تحميل \(name) ViewController")
+                isValid = false
+            }
         }
         
         if isValid {
@@ -102,10 +107,14 @@ extension AppNavigationManager {
         print("🧪 اختبار جميع واجهات Storyboard:")
         print("==================================")
         
-        let tests = [
+        // اختبار واجهات التطبيق الأساسية
+        let tests: [(String, () -> UIViewController?)] = [
             ("التعريف", { self.loadFromStoryboard(.Onboarding, identifier: .Onboarding) }),
             ("تسجيل الدخول", { self.loadFromStoryboard(.Auth, identifier: .Login) }),
-            ("الرئيسية", { self.loadFromStoryboard(.Main, identifier: .Main) })
+            ("الصفحة الرئيسية", { self.loadFromStoryboard(.Main, identifier: .Home) }),
+            ("الرسائل", { self.loadFromStoryboard(.Main, identifier: .Messages) }),
+            ("الإشعارات", { self.loadFromStoryboard(.Main, identifier: .Notifications) }),
+            ("الحساب", { self.loadFromStoryboard(.Main, identifier: .Acounts) })
         ]
         
         for (name, test) in tests {
@@ -116,6 +125,18 @@ extension AppNavigationManager {
             }
         }
         
+        // اختبار إنشاء MainTabBars برمجياً
+        print("🔧 اختبار MainTabBars:")
+        let tabBar = MainTabBars()
+        print("✅ MainTabBars: تم إنشاؤه برمجياً")
+        
         print("==================================")
+    }
+    
+    // MARK: - Helper Methods
+    
+    /// تحميل ViewController من Storyboard
+    private func loadFromStoryboard(_ storyboard: Storyboards, identifier: Identifiers) -> UIViewController? {
+        return storyboard.instantiateViewController(withIdentifier: identifier)
     }
 }

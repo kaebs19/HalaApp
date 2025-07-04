@@ -235,7 +235,7 @@ extension NativeMessagesManager {
         
         let messageLabel = UILabel()
         messageLabel.text = message
-        messageLabel.textColor = AppColors.textSecondary.color
+        messageLabel.textColor = AppColors.text.color
         messageLabel.font = FontManager.shared.fontApp(family: .cairo, style: .regular, size: .size_14)
         messageLabel.numberOfLines = 2
         
