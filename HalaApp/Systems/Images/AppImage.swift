@@ -30,15 +30,16 @@ enum AppImage: String {
     case logout = "logout"
     
     // TabBars
-        case homeSelected = "home_Select"
-       case homeUnselected = "home_UnSelect"
-       case messageSelected = "message_Select"
-       case messageUnselected = "message_UnSelect"
-       case notificationSelected = "notifications_Select"
-       case notificationUnselected = "notifications_UnSelect"
-       case accountSelected = "account_Select"
-       case accountUnselected = "account_UnSelect"
-
+    case homeSelected = "home_Select"
+    case homeUnselected = "home_UnSelect"
+    case messageSelected = "message_Select"
+    case messageUnselected = "message_UnSelect"
+    case notificationSelected = "notifications_Select"
+    case notificationUnselected = "notifications_UnSelect"
+    case accountSelected = "account_Select"
+    case accountUnselected = "account_UnSelect"
+    case like_Select = "Like_Select"
+    case like_UnSelect = "Like_UnSelect"
     
     
     var imageName: String {

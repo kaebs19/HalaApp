@@ -1,16 +1,10 @@
-//
-//  AppNavigationManager+Core.swift
-//
-//  Created by Mohammed Saleh on 07/06/2025.
-//
-
-import UIKit
 
 //
 //  MainTabBars.swift
 //
 //  Created by Mohammed Saleh on 07/06/2025.
 //
+
 
 import UIKit
 
@@ -25,6 +19,12 @@ class MainTabBars: UITabBarController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setupThemeObserver()
+        // تطبيق السمات
+        ThemeManager.shared.applyStoredTheme()
+        
+        makeResponsive()
         
         // إعداد TabBar
         setupTabBar()
@@ -45,13 +45,29 @@ class MainTabBars: UITabBarController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        
         if let indicatorView = indicatorView {
             updateIndicatorPosition(forSelectedIndex: selectedIndexs, animated: false)
         }
     }
     
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
+        if #available(iOS 13.0, *) {
+            let hasChanged =
+                previousTraitCollection?.userInterfaceStyle != traitCollection.userInterfaceStyle
+            
+            if hasChanged {
+                themeDidChange()
+            }
+        }
+    }
+
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
         self.setupTabBar() // إعادة تحميل التبويبات
     }
     
@@ -105,8 +121,8 @@ extension MainTabBars {
             ),
             TabBarItemConfig(
                 title: .Notifications,
-                selectedImage: ImageManager.image(.notificationSelected) ?? UIImage(systemName: "bell.fill")!,
-                unselectedImage: ImageManager.image(.notificationUnselected) ?? UIImage(systemName: "bell")!
+                selectedImage: ImageManager.image(.like_Select) ?? UIImage(systemName: "bell.fill")!,
+                unselectedImage: ImageManager.image(.like_UnSelect) ?? UIImage(systemName: "bell")!
             ),
             TabBarItemConfig(
                 title: .Account,
@@ -272,10 +288,13 @@ extension MainTabBars {
         // تحديث الألوان حسب الثيم
         customizeTabBarAppearance()
         indicatorView?.backgroundColor = AppColors.primary.color
-        
         // تحديث الخلفية
         view.backgroundColor = AppColors.background.color
+        
+        updateIndicatorPosition(forSelectedIndex: selectedIndexs, animated: false)
+        updateTabBarItemTitles(selectedIndex: selectedIndexs)
     }
+
 }
 
 // MARK: - Supporting Types

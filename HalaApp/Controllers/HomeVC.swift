@@ -11,16 +11,21 @@ class HomeVC: UIViewController {
     
     
     override func viewDidLoad() {
-    
+        
         super.viewDidLoad()
         setupUI()
-        }
+    }
+    
+    
+   
 }
 
 
 extension HomeVC {
     
     private func setupUI() {
-        setNavigationButtons(items: [.notificationIcon] , title: .home)
+        makeResponsive()
+        setNavigationButtons(items: [.notificationIcon] , title: .home , isLargeTitle: true)
+        view.backgroundColor = .appColor(.background)
     }
 }

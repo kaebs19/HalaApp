@@ -17,6 +17,7 @@ enum Title: String {
     case settings = "SettingsTitle"
     case notifications = "NotificationsTitle"
     case messages = "MessagesTitle"
+    case account = "AccountTitle"
     
     var TextTitle: String {
         return self.rawValue.localized

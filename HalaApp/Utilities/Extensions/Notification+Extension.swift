@@ -22,5 +22,10 @@ extension Notification.Name {
     static let hapticSettingsChanged = Notification.Name("hapticSettingsChanged")
     static let themeSettingsChanged = Notification.Name("themeSettingsChanged")
     static let languageSettingsChanged = Notification.Name("languageSettingsChanged")
+    
+    static let userStatusDidChange = Notification.Name("userStatusDidChange")
+    static let userRankDidChange = Notification.Name("userRankDidChange")
+    static let userRankUpgraded = Notification.Name("userRankUpgraded")
+
 
 }
