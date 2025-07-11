@@ -41,6 +41,24 @@ enum AppImage: String {
     case like_Select = "Like_Select"
     case like_UnSelect = "Like_UnSelect"
     
+    // accoun
+    
+    case Subscriptions = "paymoney"
+    case NearbyFriends = "nearbyFriends"
+    case Favorites = "fav"
+    case SharePrifile = "QRCode"
+    case Setting = "settings"
+    
+    // setting
+    case AccountSettings = "accountSettings"
+    case Annoucement = "annoucement"
+    case Appearance = "appearance"
+    case Helpcenter = "helpcenter"
+    case Info = "info"
+    case Message = "message"
+    case Privacy = "privacy"
+    case Language = "language"
+    
     
     var imageName: String {
         return self.rawValue

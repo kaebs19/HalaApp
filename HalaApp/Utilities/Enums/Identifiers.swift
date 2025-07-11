@@ -22,6 +22,8 @@ enum Identifiers: String {
     case Notifications = "NotificationVC"
     case Acounts = "AccountVC"
     
+    case MyQRCodeVC = "MyQRCodeVC"
+    
     var identifierName: String {
         return self.rawValue
     }

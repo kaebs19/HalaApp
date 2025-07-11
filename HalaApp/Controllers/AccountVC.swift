@@ -15,18 +15,23 @@ class AccountVC: UIViewController {
     @IBOutlet weak var nameLabel: UILabel!                    // اسم المستخدم
     @IBOutlet weak var prifileImageView: UIImageView!         // أيقونة ثابتة للمستخدم
     @IBOutlet weak var rankLabel: UILabel!                    // رتبة المستخدم
-
+    @IBOutlet weak var accountTableView: UITableView!
+    
     // MARK: - Properties
     private var currentUserStatus: UserStatus = UserStatusManager.currentStatus
     private var currentUserRank: UserRank = UserRankManager.currentRank
     private var isLayoutSetup = false // لتجنب إعادة إعداد التخطيط
 
+    private var accountItems: [AccountItem] = []
+    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
         setupObservers()      // ✅ إضافة مراقبي الأحداث
         loadUserData()        // ✅ تحميل البيانات
+        
+        loadAccountData()
         
         // للاختبار - يمكن إزالتها في الإنتاج
         #if DEBUG
@@ -77,6 +82,9 @@ extension AccountVC {
         setupLabels()
         setupImages()
         setupInteractions()
+        
+        // اعدادات tableView
+        setupTableView()
     }
     
     private func setupViews() {
@@ -515,4 +523,130 @@ extension AccountVC {
         print("التقدم: \(Int(UserRankManager.shared.progressToNextRank() * 100))%")
         print("================")
     }
+}
+
+
+extension AccountVC {
+    
+    private func setupTableView() {
+        accountTableView.registerNib(cellType: .accountCell ,
+                                     delegate: self ,
+                                     dataSource: self)
+        accountTableView.hideVerticalScrollIndicator()
+        accountTableView.configureSeparator(inset: UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16))
+    }
+    
+    private func loadAccountData() {
+        // ✅ تحميل البيانات من AccountDataManager
+        accountItems = AccountDataManager.shared.getAllItems()
+        accountTableView.reloadData()
+
+    }
+    
+}
+
+
+extension AccountVC: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 60
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let item = accountItems[indexPath.row]
+        
+        if let cell = tableView.cellForRow(at: indexPath) as? AccountsCells {
+            cell.animateSelection()
+        }
+        
+        HapticManager.shared.lightImpact()
+        
+        // الانتقال حسب النوع
+        navigateToScreen(for: item.type)
+
+    }
+}
+
+extension AccountVC: UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return accountItems.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueCell(for: indexPath ,cellType: AccountsCells.self)
+        cell.configure(with: accountItems[indexPath.row])
+        
+        return cell
+    }
+    
+    
+}
+
+// MARK: - Navigation Methods
+
+extension AccountVC {
+    
+    
+    private func navigateToScreen(for type: AccountType) {
+        switch type {
+        case .subscriptions:
+            print("🔗 الاشتراكات")
+            goToSubscriptions()
+            
+        case .nearby:
+            print("📍 الأشخاص القريبون")
+            goToNearbyPeople()
+            
+        case .favorites:
+            print("⭐ محفظتي")
+            goToWallet()
+            
+        case .shareProfile:
+            print("📤 رمز QR")
+            goToQRCode()
+            
+        case .settings:
+            print("⚙️ الإعدادات")
+            goToSettings()
+        }
+    }
+    
+    // MARK: - Individual Navigation Methods
+    private func goToSubscriptions() {
+        showComingSoon(for: "الاشتراكات")
+    }
+    
+    private func goToNearbyPeople() {
+        showComingSoon(for: "الأشخاص القريبون")
+    }
+    
+    private func goToWallet() {
+        showComingSoon(for: "محفظتي")
+    }
+    
+    private func goToQRCode() {
+        goToVC(
+            storyboard: .Main,
+            identifiers: .MyQRCodeVC,
+            navigationStyle: .present(animated: true)
+        )
+    }
+    
+    private func goToSettings() {
+        goToVC(
+            storyboard: .Main,
+            identifiers: .Settings,
+            navigationStyle: .present(animated: true)
+        )
+    }
+    
+    private func showComingSoon(for feature: String) {
+        NativeMessagesManager.shared.showInfo(
+            title: "قريباً",
+            message: "ميزة \(feature) ستكون متاحة قريباً!"
+        )
+    }
+
 }

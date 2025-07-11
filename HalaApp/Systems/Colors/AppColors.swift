@@ -19,6 +19,8 @@ enum AppColors: String, CaseIterable {
     case secondBackground = "SecondBackground"
     case placeholder = "Placeholder"
     case separator = "Separator"
+    case tintIcon = "TintIcon"
+
     
     // الوان اظافية
     case success = "Success"
@@ -32,6 +34,7 @@ enum AppColors: String, CaseIterable {
     case tabBar = "TabBar"
     case clear = "Clear"
     case boarderColor = "BoarderColor"
+    case onlyRed = "OnlyRed"
     
     
     /// الحصول على لون UIColor من ملف الألوان
@@ -91,6 +94,10 @@ enum AppColors: String, CaseIterable {
                 return UIColor.systemOrange
             case .separator:
                 return UIColor.systemGray2
+            case .tintIcon:
+              return   UIColor.systemBackground
+            case .onlyRed:
+                return UIColor.systemRed
         }
     }
 }

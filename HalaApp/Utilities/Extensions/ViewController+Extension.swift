@@ -49,6 +49,7 @@ extension UIViewController {
         }
     }
     
+    
     /// تطبيق التجاوب البسيط على الشاشة كاملة
     func makeResponsive() {
         

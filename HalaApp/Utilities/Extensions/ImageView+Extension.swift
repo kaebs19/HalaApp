@@ -4,7 +4,7 @@
 //
 //  Created by Mohammed Saleh on 23/06/2025.
 //
-
+import ObjectiveC
 import UIKit
 
 extension UIImageView {
@@ -82,3 +82,50 @@ extension UIImageView {
         self.image = image
     }
 }
+
+
+// MARK: - UIImageView Extensions
+extension UIImageView {
+    
+    /// إضافة حدود ذهبية مع تأثيرات
+    func addGoldenBorder(width: CGFloat = 3 , animated: Bool = true) {
+        let goldenColor = UIColor(red: 1.0, green: 0.84, blue: 0.0, alpha: 1.0) // اللون الذهبي
+
+        let applyBorder = {
+            self.layer.borderWidth = width
+            self.layer.borderColor = goldenColor.cgColor
+        }
+        
+        if animated {
+            UIView.animate(withDuration: 0.3 , animations: applyBorder)
+        } else {
+            applyBorder()
+        }
+    }
+    
+    /// إضافة ظل ذهبي متوهج
+    func addGoldenGlow(radius: CGFloat = 8, opacity: Float = 0.4) {
+        let goldenColor = UIColor(red: 1.0, green: 0.84, blue: 0.0, alpha: 1.0)
+        
+        self.layer.shadowColor = goldenColor.cgColor
+        self.layer.shadowOffset = CGSize(width: 0, height: 0)
+        self.layer.shadowRadius = radius
+        self.layer.shadowOpacity = opacity
+        self.layer.masksToBounds = false
+    }
+    
+    /// تأثير وميض الحدود
+    private func animateBorderFlash() {
+        let originalColor = self.layer.borderColor
+        let flashColor = UIColor.white.cgColor
+        
+        UIView.animate(withDuration: 0.1, animations: {
+            self.layer.borderColor = flashColor
+        }) { _ in
+            UIView.animate(withDuration: 0.1) {
+                self.layer.borderColor = originalColor
+            }
+        }
+    }
+}
+
